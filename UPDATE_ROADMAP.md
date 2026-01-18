@@ -578,8 +578,10 @@ C:/Users/Stang3x/Documents/Gemini projects/.venv/
 ```
 File: .env
 Contents:
-  GITHUB_TOKEN=your_token_here
-  SEARCH_API_KEY=optional_for_week_4
+    # Prefer using repository secrets: set `GITHUB_PAT` in GitHub Actions secrets or
+    # in your local environment. Do NOT commit a real token to the repo.
+    GITHUB_PAT=your_token_here
+    SEARCH_API_KEY=optional_for_week_4
 ```
 
 ### Framework

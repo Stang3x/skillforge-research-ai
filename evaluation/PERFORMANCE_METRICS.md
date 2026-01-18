@@ -1,3 +1,32 @@
+# Performance Metrics & Benchmarking
+
+This document describes the benchmark outputs collected by `evaluation/benchmark_suite.py`.
+
+Location of results: `evaluation/benchmark_results.json`
+
+Primary metrics collected:
+
+- **search.time_s**: elapsed seconds for the `search_web` call
+- **synth.time_s**: elapsed seconds for the `synthesize_findings` call
+- **preview**: first 400 characters of the returned output for spot-checking
+
+Success criteria (Week 4):
+
+- Average `search.time_s` reduced by 20%+ after caching and optimizations
+- Average `synth.time_s` reduced by 20%+ after token/tool optimizations
+- Token usage reduction documented in `evaluation/token_usage_report.json` (if `TokenTracker` used)
+
+How to run the benchmark locally:
+
+```bash
+python -m evaluation.benchmark_suite
+```
+
+Notes:
+
+- The benchmark suite is intentionally simple and focused on end-to-end timings.
+- For more detailed profiling, expand `benchmark_suite.py` to capture per-component timings
+  and use `evaluation.evaluator.ResearchEvaluator` to score outputs for quality metrics.
 # Performance Metrics (Week 4)
 
 This document will record measured improvements from the Week 4 optimization tasks (caching, token tracking, supervisor optimization).

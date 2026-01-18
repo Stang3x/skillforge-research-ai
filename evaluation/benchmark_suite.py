@@ -1,3 +1,202 @@
+"""Benchmark suite for measuring caching, latency, and token usage.
+
+This script runs a set of sample queries against the local `research_assistant`
+functions and records timings.
+"""
+import time
+import json
+from pathlib import Path
+from typing import List, Dict
+import sys
+
+# Ensure repo root is on sys.path so package imports resolve
+proj_root = Path(__file__).resolve().parents[1]
+if str(proj_root) not in sys.path:
+    sys.path.insert(0, str(proj_root))
+
+from research_assistant import search_web, synthesize_findings
+
+RESULTS_PATH = Path('evaluation') / 'benchmark_results.json'
+
+
+class BenchmarkSuite:
+    def __init__(self, queries: List[str] = None):
+        self.queries = queries or [
+            'Python caching',
+            'What is machine learning',
+            'Explain agent orchestration',
+        ]
+        self.results: Dict = {'runs': []}
+
+    def run(self):
+        run_ts = time.time()
+        for q in self.queries:
+            entry = {'query': q, 'search': {}, 'synth': {}}
+
+            t0 = time.time()
+            s = search_web(q)
+            elapsed = time.time() - t0
+            entry['search']['time_s'] = round(elapsed, 4)
+            entry['search']['preview'] = s[:400]
+
+            t0 = time.time()
+            syn = synthesize_findings(q)
+            elapsed = time.time() - t0
+            entry['synth']['time_s'] = round(elapsed, 4)
+            entry['synth']['preview'] = syn[:400]
+
+            self.results['runs'].append(entry)
+
+        self.results['summary_ts'] = run_ts
+        RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(self.results, f, indent=2)
+        return self.results
+
+
+def print_summary(results: Dict):
+    print('\nBenchmark summary:')
+    for r in results.get('runs', []):
+        print(f"- {r['query']}: search {r['search']['time_s']}s, synth {r['synth']['time_s']}s")
+
+
+if __name__ == '__main__':
+    suite = BenchmarkSuite()
+    res = suite.run()
+    print_summary(res)
+"""Benchmark suite for measuring caching, latency, and token usage.
+
+This script runs a set of sample queries against the local `research_assistant`
+functions and records timings.
+"""
+import time
+import json
+from pathlib import Path
+from typing import List, Dict
+import sys
+
+# Ensure repo root is on sys.path so package imports resolve
+proj_root = Path(__file__).resolve().parents[1]
+if str(proj_root) not in sys.path:
+    sys.path.insert(0, str(proj_root))
+
+from research_assistant import search_web, synthesize_findings
+
+RESULTS_PATH = Path('evaluation') / 'benchmark_results.json'
+
+
+class BenchmarkSuite:
+    def __init__(self, queries: List[str] = None):
+        self.queries = queries or [
+            'Python caching',
+            'What is machine learning',
+            'Explain agent orchestration',
+        ]
+        self.results: Dict = {'runs': []}
+
+    def run(self):
+        run_ts = time.time()
+        for q in self.queries:
+            entry = {'query': q, 'search': {}, 'synth': {}}
+
+            t0 = time.time()
+            s = search_web(q)
+            elapsed = time.time() - t0
+            entry['search']['time_s'] = round(elapsed, 4)
+            entry['search']['preview'] = s[:400]
+
+            t0 = time.time()
+            syn = synthesize_findings(q)
+            elapsed = time.time() - t0
+            entry['synth']['time_s'] = round(elapsed, 4)
+            entry['synth']['preview'] = syn[:400]
+
+            self.results['runs'].append(entry)
+
+        self.results['summary_ts'] = run_ts
+        RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(self.results, f, indent=2)
+        return self.results
+
+
+def print_summary(results: Dict):
+    print('\nBenchmark summary:')
+    for r in results.get('runs', []):
+        print(f"- {r['query']}: search {r['search']['time_s']}s, synth {r['synth']['time_s']}s")
+
+
+if __name__ == '__main__':
+    suite = BenchmarkSuite()
+    res = suite.run()
+    print_summary(res)
+"""Benchmark suite for measuring caching, latency, and token usage.
+
+This script runs a set of sample queries against the local `research_assistant`
+functions and records timings and token-tracker totals (if available).
+"""
+import time
+import json
+from pathlib import Path
+from typing import List, Dict
+import sys
+import importlib
+
+# Ensure repo root is on sys.path so package imports resolve
+proj_root = Path(__file__).resolve().parents[1]
+if str(proj_root) not in sys.path:
+    sys.path.insert(0, str(proj_root))
+
+from research_assistant import search_web, synthesize_findings
+
+RESULTS_PATH = Path('evaluation') / 'benchmark_results.json'
+
+
+class BenchmarkSuite:
+    def __init__(self, queries: List[str] = None):
+        self.queries = queries or [
+            'Python caching',
+            'What is machine learning',
+            'Explain agent orchestration',
+        ]
+        self.results: Dict = {'runs': []}
+
+    def run(self):
+        run_ts = time.time()
+        for q in self.queries:
+            entry = {'query': q, 'search': {}, 'synth': {}}
+
+            t0 = time.time()
+            s = search_web(q)
+            elapsed = time.time() - t0
+            entry['search']['time_s'] = round(elapsed, 4)
+            entry['search']['preview'] = s[:400]
+
+            t0 = time.time()
+            syn = synthesize_findings(q)
+            elapsed = time.time() - t0
+            entry['synth']['time_s'] = round(elapsed, 4)
+            entry['synth']['preview'] = syn[:400]
+
+            self.results['runs'].append(entry)
+
+        self.results['summary_ts'] = run_ts
+        RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(RESULTS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(self.results, f, indent=2)
+        return self.results
+
+
+def print_summary(results: Dict):
+    print('\nBenchmark summary:')
+    for r in results.get('runs', []):
+        print(f"- {r['query']}: search {r['search']['time_s']}s, synth {r['synth']['time_s']}s")
+
+
+if __name__ == '__main__':
+    suite = BenchmarkSuite()
+    res = suite.run()
+    print_summary(res)
 """
 Benchmark Suite for Week 4 improvements.
 Measures cold vs warm search latency, token usage, and quality scores using ResearchEvaluator.

@@ -1,331 +1,342 @@
-"""
-Research Assistant Agent
+"""Research Assistant — simplified, secure, and cache-enabled.
 
-A conversational research assistant that can search for information,
-analyze topics, and provide detailed research summaries.
+Features:
+- Prefer `GITHUB_PAT` environment secret (fallback to `GITHUB_TOKEN`).
+- Integrates `context-optimization.SearchResultCache` for query caching.
+- Uses `evaluation.token_tracker.TokenTracker` for local token accounting.
+- Lightweight CLI for local testing (`--local-test`).
+
+This file is intentionally self-contained and avoids embedding secrets.
 """
 
 import asyncio
-import sys
 import os
-from typing import Annotated
+import sys
+import time
+import json
+import hashlib
+from typing import List, Dict
 from dotenv import load_dotenv
-from skill_loader import initialize_skills
-from evaluation.token_tracker import TokenTracker
-from evaluation.alerts import notifier_from_env
 
-# Load environment variables
 load_dotenv()
 
-# Initialize skills
-skill_loader = initialize_skills()
 
-# Configuration
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-MODEL_ID = os.getenv("MODEL_ID", "openai/gpt-4o-mini")
+def _apply_cli_bootstrap_args():
+    """Parse a few lightweight CLI flags early and set env vars so module
+    initialization can pick them up.
 
-# Allow local testing bypass via env `LOCAL_TEST=1` or CLI flag `--local-test`
-LOCAL_TEST_ENV = os.getenv("LOCAL_TEST", "0") == "1"
-LOCAL_TEST_FLAG = "--local-test" in sys.argv or "--no-auth" in sys.argv
-LOCAL_TEST = LOCAL_TEST_ENV or LOCAL_TEST_FLAG
-
-if not GITHUB_TOKEN:
-    if LOCAL_TEST:
-        print("[WARN] LOCAL_TEST enabled — bypassing GITHUB_TOKEN requirement for local testing.")
-        GITHUB_TOKEN = "local-test-token"
-    else:
-        raise ValueError(
-            "GITHUB_TOKEN environment variable is not set. "
-            "Please set it in your .env file or system environment."
-        )
-
-
-def search_web(
-    query: Annotated[str, "The search query to find information about."],
-) -> str:
+    Supported flags (bootstrap only):
+    - --cache-dir <path>
+    - --cache-ttl <seconds>
+    - --google-cse-key <key>
+    - --google-cse-cx <cx>
+    - --local-test (shorthand to enable LOCAL_TEST)
     """
-    Search for information on the web about a given topic.
-    Returns a summary of relevant research findings.
-    """
-    print(f"[API CALL] Fetching fresh results for: {query}")
-    
-    # This is a mock implementation
-    # In production, you would integrate with a real search API (Google, Bing, etc.)
-    search_results = {
-        "python": "Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum in 1991, it supports multiple programming paradigms including procedural, object-oriented, and functional programming.",
-        "machine learning": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It uses algorithms and statistical models to identify patterns in data.",
-        "research assistant": "A research assistant is an AI agent designed to help users find, analyze, and summarize information on various topics. It can search databases, organize findings, and present information in a structured manner.",
-        "agent framework": "The Microsoft Agent Framework is a flexible framework for building, orchestrating, and deploying AI agents and multi-agent systems. It supports various LLMs, function calling, and multi-agent patterns.",
+    argv = list(sys.argv)
+    mapping = {
+        "--cache-dir": "CACHE_DIR",
+        "--cache-ttl": "CACHE_TTL_SECONDS",
+        "--google-cse-key": "GOOGLE_CSE_API_KEY",
+        "--google-cse-cx": "GOOGLE_CSE_CX",
     }
-    
-    # Simple keyword matching for demo purposes
-    query_lower = query.lower()
-    result = None
-    for keyword, result_text in search_results.items():
-        if keyword in query_lower:
-            result = f"Search results for '{query}':\n\n{result_text}"
-            break
-    
-    if not result:
-        result = f"Search results for '{query}':\n\nNo specific information found, but here's what I know: {query} is a topic that can be researched further using specialized databases and academic sources."
-    
-    return result
-
-
-def synthesize_findings(
-    topic: Annotated[str, "The research topic to synthesize findings for."],
-    sources: Annotated[int, "The number of sources to consider (1-10)."] = 3,
-) -> str:
-    """
-    Synthesize research findings from multiple sources about a given topic.
-    Returns a coherent summary of the research.
-    """
-    return f"Synthesized research findings for '{topic}' from {sources} sources:\n\n" \
-           f"Based on current research, {topic} is an important area of study. " \
-           f"Key findings include: (1) Core concepts and definitions, (2) Recent developments and trends, " \
-           f"(3) Applications and real-world use cases, (4) Challenges and limitations, (5) Future directions."
-
-
-def cite_sources(
-    topic: Annotated[str, "The topic to find citations for."],
-    style: Annotated[str, "Citation style: 'APA', 'MLA', or 'Chicago'"] = "APA",
-) -> str:
-    """
-    Generate citations for research sources on a given topic.
-    """
-    citation_examples = {
-        "APA": f"Smith, J., & Johnson, K. (2024). Research on {topic}. Journal of Technology, 45(3), 123-145.",
-        "MLA": f"Smith, John, and Karen Johnson. \"Research on {topic}.\" Journal of Technology, vol. 45, no. 3, 2024, pp. 123-145.",
-        "Chicago": f"Smith, J., and K. Johnson. \"Research on {topic}.\" Journal of Technology 45, no. 3 (2024): 123-145.",
-    }
-    
-    return f"Citation examples for '{topic}' in {style} format:\n\n{citation_examples.get(style, citation_examples['APA'])}"
-
-
-async def get_user_input():
-    """Get user input without blocking the event loop."""
-    loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, input, "\nYou: ")
-
-
-async def main():
-    """Main function to run the research assistant agent."""
-    
-    print("=" * 60)
-    print("Research Assistant Agent")
-    print("=" * 60)
-    print(f"Using model: {MODEL_ID}")
-    print("Type 'exit' to quit, 'help' for available commands")
-    print("=" * 60)
-    print()
-    
-    try:
-        # If running in LOCAL_TEST mode, create safe local-only stubs to avoid external dependencies
-        if LOCAL_TEST:
-            # initialize TokenTracker with notifier (optional Slack webhook configured via SLACK_WEBHOOK_URL)
-            slack = os.getenv('SLACK_WEBHOOK_URL')
-            tracker = TokenTracker(notifier=notifier_from_env(slack))
-            # default small budget for local demos (optional)
-            tracker.set_budget(1000.0)
-            class DummySkillLoader:
-                def build_skill_context(self):
-                    return "(local-test) No external skills loaded."
-                def list_skills(self):
-                    return []
-                def get_skill(self, name):
-                    return type('S', (), {'description': 'Local stub skill'})()
-                def get_skill_composition_guide(self):
-                    return "(local-test) Skill composition not available."
-
-            class DummyAgent:
-                def __init__(self, name, instructions, tools):
-                    self.name = name
-                    self.instructions = instructions
-                    self.tools = tools
-                def get_new_thread(self):
-                    return {}
-                async def run_stream(self, user_input, thread=None):
-                    # Simulate streaming with small delays and basic tool selection
-                    class Chunk:
-                        def __init__(self, text):
-                            self.text = text
-
-                    # 1) Acknowledge
-                    yield Chunk(f"(local-test) Received: {user_input}\n")
-                    await asyncio.sleep(0.03)
-
-                    completion_accum = ""
-
-                    # Basic intent detection
-                    text = user_input.lower()
-                    used_tools = []
-
-                    # If user asks for citations explicitly
-                    if any(k in text for k in ('cite', 'citation', 'references', 'bibliography')):
-                        used_tools.append('cite_sources')
-                        try:
-                            citation = cite_sources(user_input, style='APA')
-                        except Exception as e:
-                            citation = f"(local-test) cite_sources error: {e}"
-                        yield Chunk("(local-test) Generated citations:\n")
-                        await asyncio.sleep(0.02)
-                        yield Chunk(citation)
-                        completion_accum += citation
-                        # record tokens for this interaction
-                        try:
-                            tracker.record_request(user_input, completion_accum, meta={'tool': 'cite_sources'})
-                        except Exception:
-                            pass
-                        return
-
-                    # If user asks a research-style question, perform search then synthesize
-                    if any(k in text for k in ('what is', 'who is', 'tell me about', 'search', 'find', 'explain', 'overview', 'describe')):
-                        used_tools.append('search_web')
-                        try:
-                            search_res = search_web(user_input)
-                        except Exception as e:
-                            search_res = f"(local-test) search_web error: {e}"
-
-                        yield Chunk("(local-test) Search results:\n")
-                        await asyncio.sleep(0.02)
-                        # stream search result in chunks
-                        for i in range(0, len(search_res), 300):
-                            chunk_text = search_res[i:i+300]
-                            yield Chunk(chunk_text)
-                            completion_accum += chunk_text
-                            await asyncio.sleep(0.02)
-
-                        # then synthesize findings
-                        used_tools.append('synthesize_findings')
-                        try:
-                            synth = synthesize_findings(user_input, sources=2)
-                        except Exception as e:
-                            synth = f"(local-test) synthesize_findings error: {e}"
-
-                        yield Chunk("\n(local-test) Synthesized findings:\n")
-                        await asyncio.sleep(0.02)
-                        yield Chunk(synth)
-                        completion_accum += synth
-                        # record tokens for combined search+synthesis
-                        try:
-                            tracker.record_request(user_input, completion_accum, meta={'tool': 'search+synthesize'})
-                        except Exception:
-                            pass
-                        return
-
-                    # Fallback: short search + short synthesis
-                    try:
-                        search_res = search_web(user_input)
-                    except Exception as e:
-                        search_res = f"(local-test) search_web error: {e}"
-
-                    # Fallback: short search + short synthesis
-                    fallback_chunk = search_res[:400]
-                    yield Chunk(fallback_chunk)
-                    completion_accum += fallback_chunk
-                    await asyncio.sleep(0.02)
-                    try:
-                        synth = synthesize_findings(user_input, sources=1)
-                    except Exception as e:
-                        synth = f"(local-test) synthesize_findings error: {e}"
-                    yield Chunk("\n\n" + synth)
-                    completion_accum += "\n\n" + synth
-                    try:
-                        tracker.record_request(user_input, completion_accum, meta={'tool': 'fallback'})
-                    except Exception:
-                        pass
-
-            tools = [search_web, synthesize_findings, cite_sources]
-            # Override skill_loader for local test
-            skill_loader = DummySkillLoader()
-            agent = DummyAgent(name="ResearchAssistant", instructions="(local-test)", tools=tools)
-
-        else:
-            # Initialize TokenTracker for production usage (hook for request recording & alerts)
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a == "--local-test":
+            os.environ["LOCAL_TEST"] = "1"
+            # remove the flag from sys.argv to avoid downstream parsing surprises
             try:
-                slack = os.getenv('SLACK_WEBHOOK_URL')
-                tracker = TokenTracker(notifier=notifier_from_env(slack))
-                # optional budget via env var (dollars)
+                sys.argv.remove("--local-test")
+            except Exception:
+                pass
+            i += 1
+            continue
+        if a in mapping:
+            if i + 1 < len(argv):
+                os.environ[mapping[a]] = argv[i + 1]
+                # remove both from sys.argv
                 try:
-                    b = os.getenv('TOKEN_BUDGET')
-                    if b:
-                        tracker.set_budget(float(b))
+                    sys.argv.remove(a)
+                    sys.argv.remove(argv[i + 1])
                 except Exception:
                     pass
-            except Exception:
-                tracker = None
+            i += 2
+            continue
+        i += 1
 
-            # These imports are removed in the fixed version as they require external modules not provided.
-            # If you have agent_framework installed, uncomment and adjust. When you wire your production
-            # agent, call `tracker.record_request(prompt, completion, meta={'tool': 'your_tool'})` after
-            # each response to persist token usage and trigger alerts if budgets are exceeded.
-            # from agent_framework import ChatAgent
-            # from agent_framework.openai import OpenAIChatClient
-            # from openai import AsyncOpenAI
 
-            raise NotImplementedError("Non-local mode requires external dependencies (agent_framework, OpenAI). Run with LOCAL_TEST=1.")
+_apply_cli_bootstrap_args()
 
-        # Create a thread for maintaining conversation context
-        thread = agent.get_new_thread()
-        
-        # Interactive conversation loop
-        while True:
-            try:
-                user_input = await get_user_input()
-                user_input = user_input.strip()
-                
-                if not user_input:
-                    continue
-                
-                if user_input.lower() == "exit":
-                    print("Goodbye!")
-                    break
-                
-                if user_input.lower() == "help":
-                    print("\nAvailable commands and features:")
-                    print("- Ask research questions")
-                    print("- Request information synthesis")
-                    print("- Ask for citations in different formats (APA, MLA, Chicago)")
-                    print("- Ask about research methodology, source evaluation, or citation standards")
-                    print("\nAvailable Skills:")
-                    for skill in skill_loader.list_skills():
-                        skill_obj = skill_loader.get_skill(skill)
-                        print(f"  - {skill.replace('-', ' ').title()}: {skill_obj.description[:60]}...")
-                    print("\n- Type 'skills' for detailed skill documentation")
-                    print("- Type 'exit' to quit")
-                    continue
-                
-                if user_input.lower() == "skills":
-                    print("\n" + skill_loader.get_skill_composition_guide())
-                    continue
-                
-                # Stream the agent's response
-                print("\nResearchAssistant: ", end="", flush=True)
-                async for chunk in agent.run_stream(user_input, thread=thread):
-                    if chunk.text:
-                        print(chunk.text, end="", flush=True)
-                print()
-                
-            except KeyboardInterrupt:
-                print("\n\nGoodbye!")
-                break
-            except Exception as e:
-                print(f"\nError: {e}")
-                print("Please try again.")
-    
+# Prefer repository secret name `GITHUB_PAT`, fall back to older names for compatibility
+GITHUB_TOKEN = os.getenv("GITHUB_PAT") or os.getenv("GITHUB_TOKEN")
+MODEL_ID = os.getenv("MODEL_ID", "openai/gpt-4o-mini")
+
+# Local-test mode bypasses external API requirements for safe demo runs
+LOCAL_TEST = os.getenv("LOCAL_TEST", "0") == "1" or "--local-test" in sys.argv
+
+if not GITHUB_TOKEN and not LOCAL_TEST:
+    # allow tests and local demo to run without tokens
+    raise ValueError("GITHUB_PAT (preferred) or GITHUB_TOKEN must be set, or run with --local-test")
+
+# Cache TTL (seconds)
+CACHE_TTL_SECONDS = int(os.getenv("CACHE_TTL_SECONDS", "3600"))
+
+
+class SimpleFileCache:
+    """A minimal file-backed cache with TTL; used as a graceful fallback.
+
+    Methods: `get(key)` -> value|None, `set(key, value)`.
+    Stored JSON format: {"_ts": float, "value": <value>}.
+    """
+
+    def __init__(self, dirpath: str = ".simple_cache", ttl: int = 3600):
+        import pathlib
+
+        self.dir = pathlib.Path(dirpath)
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.ttl = int(os.getenv("CACHE_TTL_SECONDS", ttl))
+
+    def _key_path(self, key: str):
+        name = hashlib.sha256(key.encode("utf-8")).hexdigest() + ".json"
+        return self.dir / name
+
+    def get(self, key: str):
+        p = self._key_path(key)
+        if not p.exists():
+            return None
+        try:
+            text = p.read_text(encoding="utf-8")
+            data = json.loads(text)
+            ts = float(data.get("_ts", 0))
+            if time.time() - ts > self.ttl:
+                try:
+                    p.unlink()
+                except Exception:
+                    pass
+                return None
+            return data.get("value")
+        except Exception:
+            return None
+
+    def set(self, key: str, value):
+        p = self._key_path(key)
+        try:
+            data = {"_ts": time.time(), "value": value}
+            p.write_text(json.dumps(data), encoding="utf-8")
+        except Exception:
+            pass
+
+
+# Lazy imports for optional modules in repo; prefer in-repo SearchResultCache
+cache = None
+try:
+    from context_optimization.caching import SearchResultCache
+
+    cache = SearchResultCache()
+except Exception:
+    # fallback to file cache when the optional package isn't available
+    try:
+        cache = SimpleFileCache(dirpath=os.getenv("CACHE_DIR", ".simple_cache"), ttl=CACHE_TTL_SECONDS)
+    except Exception:
+        cache = None
+
+
+# TokenTracker (best-effort)
+try:
+    from evaluation.token_tracker import TokenTracker
+    from evaluation.alerts import notifier_from_env
+
+    tracker = TokenTracker(notifier=notifier_from_env(os.getenv("SLACK_WEBHOOK_URL")))
+except Exception:
+    TokenTracker = None
+    tracker = None
+
+
+def _make_snippet(text: str, max_len: int = 240) -> str:
+    s = " ".join(text.split())
+    return s[:max_len] + ("..." if len(s) > max_len else "")
+
+
+def _mock_search_engine(query: str) -> List[Dict]:
+    """Return a small set of structured results (title, url, snippet).
+    This is a safe local stub used for demos and for caching.
+    """
+    data = {
+        "python": [
+            {"title": "Python — Overview", "url": "https://python.org/", "snippet": "Python is a high-level, interpreted programming language."}
+        ],
+        "machine learning": [
+            {"title": "Machine Learning — Intro", "url": "https://en.wikipedia.org/wiki/Machine_learning", "snippet": "Machine learning enables systems to learn from data."}
+        ],
+    }
+    q = query.lower()
+    for k in data:
+        if k in q:
+            return data[k]
+    # fallback generic result
+    return [{"title": f"Results for {query}", "url": "https://example.com/search", "snippet": f"No direct match for '{query}'. Consider refining the query."}]
+
+
+def _google_search(query: str) -> List[Dict]:
+    """Optional Google Custom Search integration.
+
+    Requires `GOOGLE_CSE_API_KEY` and `GOOGLE_CSE_CX` environment variables.
+    Returns a list of result dicts with `title`, `url`, and `snippet`.
+    """
+    try:
+        api_key = os.getenv("GOOGLE_CSE_API_KEY")
+        cx = os.getenv("GOOGLE_CSE_CX")
+        if not api_key or not cx:
+            raise RuntimeError("Google CSE not configured")
+        import requests
+
+        params = {"key": api_key, "cx": cx, "q": query}
+        resp = requests.get("https://www.googleapis.com/customsearch/v1", params=params, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        items = data.get("items", [])
+        results = []
+        for it in items[:5]:
+            results.append({
+                "title": it.get("title", "")[:180],
+                "url": it.get("link", ""),
+                "snippet": it.get("snippet", ""),
+            })
+        return results or []
+    except Exception:
+        return []
+
+
+def search_web(query: str) -> str:
+    """Search wrapper: return a concise textual summary. Uses cache when available.
+
+    The cache stores a list of result dicts (title/url/snippet). This function
+    returns a textual rendering suitable for downstream synthesis.
+    """
+    # Try cache first
+    try:
+        if cache:
+            cached = cache.get(query)
+            if cached:
+                parts = []
+                for r in (cached[:3] if isinstance(cached, list) else [cached]):
+                    title = r.get("title") if isinstance(r, dict) else str(r)
+                    snippet = _make_snippet(r.get("snippet") if isinstance(r, dict) else str(r), max_len=180)
+                    url = r.get("url") if isinstance(r, dict) else ""
+                    parts.append(f"{title} — {snippet} ({url})")
+                rendered = "\n\n".join(parts)
+                try:
+                    if tracker:
+                        tracker.record_request(query, rendered, meta={"tool": "search_web_cached"})
+                except Exception:
+                    pass
+                return rendered
     except Exception as e:
-        print(f"Fatal error: {e}")
-        sys.exit(1)
+        print(f"[CACHE] lookup error: {e}")
+
+    # Fetch fresh (mock or real integration point). Prefer Google CSE if configured.
+    results = _mock_search_engine(query)
+    try:
+        if os.getenv("GOOGLE_CSE_API_KEY") and os.getenv("GOOGLE_CSE_CX"):
+            g = _google_search(query)
+            if g:
+                results = g
+    except Exception:
+        pass
+
+    # Persist into cache (limit stored results to reduce size)
+    try:
+        if cache:
+            cache.set(query, results[:3])
+    except Exception as e:
+        print(f"[CACHE] write error: {e}")
+
+    rendered = "\n\n".join([f"{r['title']} — {_make_snippet(r['snippet'])} ({r['url']})" for r in results])
+    # Record token usage (best-effort)
+    try:
+        if tracker:
+            resp = tracker.record_request(query, rendered, meta={'tool': 'search_web'})
+            # If tracker returns an alert (budget exceeded), surface it
+            if isinstance(resp, dict) and resp.get('alert'):
+                print(f"[TOKEN TRACKER] Alert: {resp}")
+    except Exception:
+        pass
+
+    return rendered
+
+
+def synthesize_findings(topic: str, sources: int = 3) -> str:
+    """Create a short synthesis from search results.
+
+    This function is intentionally brief to reduce token usage.
+    """
+    search_text = search_web(topic)
+    summary = f"SYNTHESIS: Key points for '{topic}':\n"
+    # heuristics: pick first 2-3 sentences from search_text
+    lines = [l.strip() for l in search_text.split('\n') if l.strip()]
+    bullets = []
+    for l in lines[:min(3, sources)]:
+        bullets.append(f"- {_make_snippet(l, max_len=180)}")
+
+    out = summary + "\n".join(bullets)
+
+    # TokenTracker record (best-effort)
+    try:
+        if tracker:
+            tracker.record_request(topic, out, meta={"tool": "synthesize_findings"})
+    except Exception:
+        pass
+
+    return out
+
+
+async def interactive_loop():
+    print("Research Assistant — interactive (type 'exit' to quit)")
+    while True:
+        try:
+            user = await asyncio.get_event_loop().run_in_executor(None, input, "\nYou: ")
+        except (EOFError, KeyboardInterrupt):
+            print("\nExiting.")
+            return
+        if not user:
+            continue
+        if user.strip().lower() in ("exit", "quit"):
+            print("Goodbye.")
+            return
+        if user.strip().lower() in ("help", "h"):
+            print("Commands: 'search <query>', 'synth <topic>' or free text research queries.")
+            continue
+
+        # simple command parsing
+        text = user.strip()
+        if text.startswith("search "):
+            q = text[len("search "):].strip()
+            res = search_web(q)
+            print("\n" + res)
+            continue
+        if text.startswith("synth "):
+            topic = text[len("synth "):].strip()
+            out = synthesize_findings(topic)
+            print("\n" + out)
+            continue
+
+        # fallback: treat as synth query
+        out = synthesize_findings(text)
+        print("\n" + out)
+
+
+def main():
+    if LOCAL_TEST:
+        # small demo run
+        print("LOCAL_TEST: running a brief demo")
+        print(search_web("python caching"))
+        print("\n--- Synthesizing 'research assistant' ---")
+        print(synthesize_findings("research assistant"))
+        return
+
+    # run interactive event loop
+    asyncio.run(interactive_loop())
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\n\nInterrupted by user.")
-        sys.exit(0)
-    except Exception as e:
-        print(f"Fatal error: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+    main()

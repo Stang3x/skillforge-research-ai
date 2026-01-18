@@ -5,7 +5,9 @@ $head = 'week5-milestones'
 $base = 'develop'
 $title = 'week5: add PowerShell references, demos, CI/tests'
 $body = 'Adds PowerShell references, safe demos, pytest + CI workflow.'
-$token = $env:GITHUB_TOKEN
+$token = $env:GITHUB_PAT
+# fallbacks for compatibility
+if (-not $token) { $token = $env:GITHUB_TOKEN }
 if (-not $token) { $token = $env:GH_TOKEN }
 if (-not $token) { Write-Output 'NO_TOKEN'; exit 0 }
 $headers = @{ Authorization = "token $token"; 'User-Agent' = 'script' }

@@ -1,0 +1,19 @@
+{
+  "examples": [
+    {
+      "query": "Python programming language",
+      "search": "Python \u2014 Overview \u2014 Python is a high-level, interpreted programming language. (https://python.org/)",
+      "synthesis": "SYNTHESIS: Key points for 'Python programming language':\n- Python \u2014 Overview \u2014 Python is a high-level, interpreted programming language. (https://python.org/)"
+    },
+    {
+      "query": "Machine learning basics",
+      "search": "Machine Learning \u2014 Intro \u2014 Machine learning enables systems to learn from data. (https://en.wikipedia.org/wiki/Machine_learning)",
+      "synthesis": "SYNTHESIS: Key points for 'Machine learning basics':\n- Machine Learning \u2014 Intro \u2014 Machine learning enables systems to learn from data. (https://en.wikipedia.org/wiki/Machine_learning)"
+    },
+    {
+      "query": "Prompt engineering best practices",
+      "search": "Results for Prompt engineering best practices \u2014 No direct match for 'Prompt engineering best practices'. Consider refining the query. (https://example.com/search)",
+      "synthesis": "SYNTHESIS: Key points for 'Prompt engineering best practices':\n- Results for Prompt engineering best practices \u2014 No direct match for 'Prompt engineering best practices'. Consider refining the query. (https://example.com/search)"
+    }
+  ]
+}

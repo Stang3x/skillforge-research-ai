@@ -109,11 +109,12 @@ if __name__ == "__main__":
             except Exception:
                 ra_mod = None
 
-            GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+            # Prefer `GITHUB_PAT` but fall back to `GITHUB_TOKEN` for compatibility
+            GITHUB_TOKEN = os.getenv("GITHUB_PAT") or os.getenv("GITHUB_TOKEN")
             MODEL_ID = os.getenv("MODEL_ID", "openai/gpt-4o-mini")
 
             if not GITHUB_TOKEN:
-                raise RuntimeError("GITHUB_TOKEN not found in environment — cannot initialize real agents")
+                raise RuntimeError("GITHUB_PAT or GITHUB_TOKEN not found in environment — cannot initialize real agents")
 
             # Create clients and ChatAgent instances (wrappers)
             async_client = AsyncOpenAI(base_url="https://models.github.ai/inference", api_key=GITHUB_TOKEN)

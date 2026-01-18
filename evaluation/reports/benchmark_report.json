@@ -3,14 +3,14 @@
     {
       "query": "Python programming language",
       "cold": {
-        "time_s": 0.000709,
+        "time_s": 0.001665,
         "input_tokens": 15,
         "output_tokens": 74,
         "accuracy": 2.23,
         "completeness": 3.06
       },
       "warm": {
-        "avg_time_s": 0.000539,
+        "avg_time_s": 4e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -22,14 +22,14 @@
     {
       "query": "Machine learning basics",
       "cold": {
-        "time_s": 0.000546,
+        "time_s": 0.001392,
         "input_tokens": 15,
         "output_tokens": 76,
         "accuracy": 2.54,
         "completeness": 3.28
       },
       "warm": {
-        "avg_time_s": 0.000514,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -41,14 +41,14 @@
     {
       "query": "Research assistant capabilities",
       "cold": {
-        "time_s": 0.000797,
+        "time_s": 0.001262,
         "input_tokens": 15,
         "output_tokens": 76,
         "accuracy": 3.0,
         "completeness": 3.6
       },
       "warm": {
-        "avg_time_s": 0.000654,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -60,14 +60,14 @@
     {
       "query": "Agent framework design patterns",
       "cold": {
-        "time_s": 0.00058,
+        "time_s": 0.001587,
         "input_tokens": 20,
         "output_tokens": 68,
         "accuracy": 2.43,
         "completeness": 3.2
       },
       "warm": {
-        "avg_time_s": 0.000485,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -79,14 +79,14 @@
     {
       "query": "Transformer model architecture",
       "cold": {
-        "time_s": 0.000643,
+        "time_s": 0.00144,
         "input_tokens": 15,
         "output_tokens": 20,
         "accuracy": 1.92,
         "completeness": 2.57
       },
       "warm": {
-        "avg_time_s": 0.000501,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -98,14 +98,14 @@
     {
       "query": "Context window optimization techniques",
       "cold": {
-        "time_s": 0.000645,
+        "time_s": 0.001594,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
         "completeness": 2.74
       },
       "warm": {
-        "avg_time_s": 0.000533,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -117,14 +117,14 @@
     {
       "query": "Prompt engineering best practices",
       "cold": {
-        "time_s": 0.000569,
+        "time_s": 0.001574,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
         "completeness": 2.74
       },
       "warm": {
-        "avg_time_s": 0.000583,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -136,14 +136,14 @@
     {
       "query": "Memory systems for agents",
       "cold": {
-        "time_s": 0.000591,
+        "time_s": 0.001335,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
         "completeness": 2.74
       },
       "warm": {
-        "avg_time_s": 0.000572,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -155,14 +155,14 @@
     {
       "query": "Evaluation metrics for LLMs",
       "cold": {
-        "time_s": 0.000602,
+        "time_s": 0.001677,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
         "completeness": 2.74
       },
       "warm": {
-        "avg_time_s": 0.000495,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -174,14 +174,14 @@
     {
       "query": "Unknown topic for negative case",
       "cold": {
-        "time_s": 0.000667,
+        "time_s": 0.001613,
         "input_tokens": 25,
         "output_tokens": 24,
         "accuracy": 2.33,
         "completeness": 2.89
       },
       "warm": {
-        "avg_time_s": 0.000583,
+        "avg_time_s": 2e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 5,
@@ -193,9 +193,9 @@
   ],
   "summary": {
     "queries": 10,
-    "total_cold_time_s": 0.0063,
-    "total_warm_time_s": 0.0055,
-    "percent_time_improvement": 14.02,
+    "total_cold_time_s": 0.0151,
+    "total_warm_time_s": 0.0,
+    "percent_time_improvement": 99.85,
     "total_input_tokens": 226,
     "total_output_tokens": 639
   }

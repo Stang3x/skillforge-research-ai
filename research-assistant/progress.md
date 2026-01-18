@@ -61,7 +61,8 @@ research-assistant/
 
 **Environment File (.env):**
 ```env
-GITHUB_TOKEN=GITHUB_TOKEN_PLACEHOLDER
+# Prefer storing your Personal Access Token in repository secrets as `GITHUB_PAT`.
+GITHUB_PAT=GITHUB_PAT_PLACEHOLDER
 MODEL_ID=openai/gpt-4o-mini
 ```
 
@@ -86,9 +87,10 @@ C:/Users/Stang3x/Documents/Gemini projects/.venv/
 #### 2.1 Agent Initialization
 ```python
 # OpenAI Client Setup
+# Use `GITHUB_PAT` (preferred) or fall back to `GITHUB_TOKEN`.
 openai_client = AsyncOpenAI(
-    base_url="https://models.github.ai/inference",
-    api_key=GITHUB_TOKEN,
+  base_url="https://models.github.ai/inference",
+  api_key=GITHUB_PAT,  # set from env
 )
 
 # Chat Client Configuration
@@ -364,7 +366,8 @@ research_assistant/
 
 ```env
 # Authentication
-GITHUB_TOKEN=GITHUB_TOKEN_PLACEHOLDER
+# Prefer storing your Personal Access Token in repository secrets as `GITHUB_PAT`.
+GITHUB_PAT=GITHUB_PAT_PLACEHOLDER
 
 # Model Configuration
 MODEL_ID=openai/gpt-4o-mini

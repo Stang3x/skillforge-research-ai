@@ -112,6 +112,14 @@ except Exception:
 
 
 from typing import Callable
+from dataclasses import dataclass
+
+
+@dataclass
+class MockResponse:
+    """Small compatibility helper used by benchmarks to represent token counts."""
+    input_tokens: int = 0
+    output_tokens: int = 0
 
 
 class TokenTracker:
@@ -120,6 +128,9 @@ class TokenTracker:
         self.cost_per_1k = float(cost_per_1k_tokens)
         self.records = []
         self.total_tokens = 0
+        # Backwards-compatible fields expected by older benchmark code
+        self.total_input_tokens = 0
+        self.total_output_tokens = 0
         self.total_cost = 0.0
         self.budget = None
         self.notifier = notifier
@@ -185,6 +196,12 @@ class TokenTracker:
         }
         self.records.append(rec)
         self.total_tokens += tokens
+        # Attempt to preserve input/output breakdown where possible
+        try:
+            self.total_input_tokens += int(pt)
+            self.total_output_tokens += int(ct)
+        except Exception:
+            pass
         self.total_cost += cost
         self._save()
 
@@ -212,6 +229,12 @@ class TokenTracker:
         }
         self.records.append(rec)
         self.total_tokens += tokens
+        # maintain compatibility counters
+        try:
+            self.total_input_tokens += int(prompt_tokens)
+            self.total_output_tokens += int(completion_tokens)
+        except Exception:
+            pass
         self.total_cost += cost
         self._save()
         if self.budget is not None and self.total_cost > self.budget:
@@ -223,6 +246,22 @@ class TokenTracker:
                     pass
             return alert
         return {'total_tokens': self.total_tokens, 'total_cost': self.total_cost}
+
+    def track(self, response, agent: Optional[str] = None):
+        """Compatibility shim: accept a MockResponse-like object and record tokens.
+
+        `response` may be an object with `input_tokens` and `output_tokens` attributes
+        (the benchmark uses `MockResponse`). We translate that into the internal
+        record structure and update totals.
+        """
+        try:
+            in_tok = int(getattr(response, 'input_tokens', 0) or 0)
+            out_tok = int(getattr(response, 'output_tokens', 0) or 0)
+        except Exception:
+            in_tok = 0
+            out_tok = 0
+        tool_name = agent or (getattr(response, 'agent', None) or 'unknown')
+        return self.record(tool_name, in_tok, out_tok)
 
     def totals(self, tool: Optional[str] = None):
         if tool:
