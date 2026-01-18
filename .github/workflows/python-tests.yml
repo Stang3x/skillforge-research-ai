@@ -1,5 +1,11 @@
 name: Python CI
 
+# Give the workflow scoped permissions and expose the built-in GITHUB_TOKEN
+permissions:
+  contents: read
+  pull-requests: write
+  actions: read
+
 on:
   push:
     branches: [ main, master, '**' ]
@@ -23,5 +29,8 @@ jobs:
         env:
           GOOGLE_CSE_API_KEY: ${{ secrets.GOOGLE_CSE_API_KEY }}
           GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
+          # Expose the workflow token for any steps that need authenticated REST API calls
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python -m pytest -q
