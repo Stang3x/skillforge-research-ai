@@ -11,6 +11,8 @@ import os
 from typing import Annotated
 from dotenv import load_dotenv
 from skill_loader import initialize_skills
+from evaluation.token_tracker import TokenTracker
+from evaluation.alerts import notifier_from_env
 
 # Load environment variables
 load_dotenv()
@@ -120,6 +122,11 @@ async def main():
     try:
         # If running in LOCAL_TEST mode, create safe local-only stubs to avoid external dependencies
         if LOCAL_TEST:
+            # initialize TokenTracker with notifier (optional Slack webhook configured via SLACK_WEBHOOK_URL)
+            slack = os.getenv('SLACK_WEBHOOK_URL')
+            tracker = TokenTracker(notifier=notifier_from_env(slack))
+            # default small budget for local demos (optional)
+            tracker.set_budget(1000.0)
             class DummySkillLoader:
                 def build_skill_context(self):
                     return "(local-test) No external skills loaded."
@@ -147,6 +154,8 @@ async def main():
                     yield Chunk(f"(local-test) Received: {user_input}\n")
                     await asyncio.sleep(0.03)
 
+                    completion_accum = ""
+
                     # Basic intent detection
                     text = user_input.lower()
                     used_tools = []
@@ -161,6 +170,12 @@ async def main():
                         yield Chunk("(local-test) Generated citations:\n")
                         await asyncio.sleep(0.02)
                         yield Chunk(citation)
+                        completion_accum += citation
+                        # record tokens for this interaction
+                        try:
+                            tracker.record_request(user_input, completion_accum, meta={'tool': 'cite_sources'})
+                        except Exception:
+                            pass
                         return
 
                     # If user asks a research-style question, perform search then synthesize
@@ -175,7 +190,9 @@ async def main():
                         await asyncio.sleep(0.02)
                         # stream search result in chunks
                         for i in range(0, len(search_res), 300):
-                            yield Chunk(search_res[i:i+300])
+                            chunk_text = search_res[i:i+300]
+                            yield Chunk(chunk_text)
+                            completion_accum += chunk_text
                             await asyncio.sleep(0.02)
 
                         # then synthesize findings
@@ -188,6 +205,12 @@ async def main():
                         yield Chunk("\n(local-test) Synthesized findings:\n")
                         await asyncio.sleep(0.02)
                         yield Chunk(synth)
+                        completion_accum += synth
+                        # record tokens for combined search+synthesis
+                        try:
+                            tracker.record_request(user_input, completion_accum, meta={'tool': 'search+synthesize'})
+                        except Exception:
+                            pass
                         return
 
                     # Fallback: short search + short synthesis
@@ -196,13 +219,21 @@ async def main():
                     except Exception as e:
                         search_res = f"(local-test) search_web error: {e}"
 
-                    yield Chunk(search_res[:400])
+                    # Fallback: short search + short synthesis
+                    fallback_chunk = search_res[:400]
+                    yield Chunk(fallback_chunk)
+                    completion_accum += fallback_chunk
                     await asyncio.sleep(0.02)
                     try:
                         synth = synthesize_findings(user_input, sources=1)
                     except Exception as e:
                         synth = f"(local-test) synthesize_findings error: {e}"
                     yield Chunk("\n\n" + synth)
+                    completion_accum += "\n\n" + synth
+                    try:
+                        tracker.record_request(user_input, completion_accum, meta={'tool': 'fallback'})
+                    except Exception:
+                        pass
 
             tools = [search_web, synthesize_findings, cite_sources]
             # Override skill_loader for local test
@@ -210,12 +241,28 @@ async def main():
             agent = DummyAgent(name="ResearchAssistant", instructions="(local-test)", tools=tools)
 
         else:
+            # Initialize TokenTracker for production usage (hook for request recording & alerts)
+            try:
+                slack = os.getenv('SLACK_WEBHOOK_URL')
+                tracker = TokenTracker(notifier=notifier_from_env(slack))
+                # optional budget via env var (dollars)
+                try:
+                    b = os.getenv('TOKEN_BUDGET')
+                    if b:
+                        tracker.set_budget(float(b))
+                except Exception:
+                    pass
+            except Exception:
+                tracker = None
+
             # These imports are removed in the fixed version as they require external modules not provided.
-            # If you have agent_framework installed, uncomment and adjust.
+            # If you have agent_framework installed, uncomment and adjust. When you wire your production
+            # agent, call `tracker.record_request(prompt, completion, meta={'tool': 'your_tool'})` after
+            # each response to persist token usage and trigger alerts if budgets are exceeded.
             # from agent_framework import ChatAgent
             # from agent_framework.openai import OpenAIChatClient
             # from openai import AsyncOpenAI
-            
+
             raise NotImplementedError("Non-local mode requires external dependencies (agent_framework, OpenAI). Run with LOCAL_TEST=1.")
 
         # Create a thread for maintaining conversation context

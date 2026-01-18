@@ -8,6 +8,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      METRICS_COLLECTOR_URL: ${{ secrets.METRICS_COLLECTOR_URL }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v5

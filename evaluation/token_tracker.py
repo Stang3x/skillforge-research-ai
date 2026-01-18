@@ -1,3 +1,97 @@
+"""Token tracking utilities for per-tool/request token accounting.
+
+Provides a simple JSON-persisted TokenTracker with methods to record
+token usage, query totals, and check budgets.
+"""
+from __future__ import annotations
+
+import json
+import threading
+from pathlib import Path
+from typing import Dict, Optional
+
+
+class TokenTracker:
+    def __init__(self, path: str | Path = "evaluation/token_tracker.json"):
+        self.path = Path(path)
+        self._lock = threading.Lock()
+        self._data: Dict[str, Dict[str, int]] = {}
+        self._load()
+
+    def _load(self) -> None:
+        if self.path.exists():
+            try:
+                with self.path.open("r", encoding="utf-8") as f:
+                    raw = json.load(f)
+                # ensure ints
+                self._data = {k: {kk: int(vv) for kk, vv in v.items()} for k, v in raw.items()}
+            except Exception:
+                # corrupted file — reset
+                self._data = {}
+        else:
+            self._data = {}
+
+    def _save(self) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self.path.open("w", encoding="utf-8") as f:
+            json.dump(self._data, f, indent=2)
+
+    def record(self, tool: str, prompt_tokens: int = 0, completion_tokens: int = 0) -> None:
+        """Record token usage for a given tool.
+
+        This method is thread-safe and persists to disk on each call.
+        """
+        if prompt_tokens < 0 or completion_tokens < 0:
+            raise ValueError("token counts must be non-negative")
+
+        with self._lock:
+            entry = self._data.setdefault(tool, {"prompt": 0, "completion": 0, "total": 0})
+            entry["prompt"] += int(prompt_tokens)
+            entry["completion"] += int(completion_tokens)
+            entry["total"] += int(prompt_tokens) + int(completion_tokens)
+            self._save()
+
+    def totals(self, tool: Optional[str] = None) -> Dict[str, int] | int:
+        """Return totals for a tool or aggregate total across all tools.
+
+        If `tool` is provided, returns the tool's summary dict. Otherwise
+        returns the aggregate total int.
+        """
+        with self._lock:
+            if tool:
+                return dict(self._data.get(tool, {"prompt": 0, "completion": 0, "total": 0}))
+            # aggregate total
+            return sum(v.get("total", 0) for v in self._data.values())
+
+    def budget_exceeded(self, tool: str, budget: int) -> bool:
+        """Return True if the given tool's total tokens exceed `budget`."""
+        if budget < 0:
+            raise ValueError("budget must be non-negative")
+        with self._lock:
+            return self._data.get(tool, {}).get("total", 0) > int(budget)
+
+    def reset(self) -> None:
+        """Reset all counters and persist the empty state."""
+        with self._lock:
+            self._data = {}
+            self._save()
+
+
+if __name__ == "__main__":
+    # simple CLI for debugging
+    import argparse
+
+    p = argparse.ArgumentParser()
+    p.add_argument("--path", default=None)
+    p.add_argument("--show", action="store_true")
+    p.add_argument("--reset", action="store_true")
+    args = p.parse_args()
+    tracker = TokenTracker(args.path) if args.path else TokenTracker()
+    if args.reset:
+        tracker.reset()
+        print("reset")
+    if args.show:
+        print(json.dumps(tracker._data, indent=2))
 """
 TokenTracker: simple per-request token and cost tracking for evaluation.
 
@@ -17,14 +111,18 @@ except Exception:
     _OTEL_TRACER = None
 
 
+from typing import Callable
+
+
 class TokenTracker:
-    def __init__(self, storage: str = 'evaluation/token_tracker.json', cost_per_1k_tokens: float = 0.002):
+    def __init__(self, storage: str = 'evaluation/token_tracker.json', cost_per_1k_tokens: float = 0.002, notifier: Optional[Callable] = None):
         self.storage = Path(storage)
         self.cost_per_1k = float(cost_per_1k_tokens)
         self.records = []
         self.total_tokens = 0
         self.total_cost = 0.0
         self.budget = None
+        self.notifier = notifier
         self._load()
 
     def _load(self):
@@ -92,8 +190,61 @@ class TokenTracker:
 
         # budget alert
         if self.budget is not None and self.total_cost > self.budget:
-            return {'alert': 'budget_exceeded', 'total_cost': self.total_cost}
+            alert = {'alert': 'budget_exceeded', 'total_cost': self.total_cost}
+            if self.notifier:
+                try:
+                    self.notifier('global', alert)
+                except Exception:
+                    pass
+            return alert
         return {'total_tokens': self.total_tokens, 'total_cost': self.total_cost}
+
+    # Backwards-compatible API: record numeric token counts for a named tool
+    def record(self, tool: str, prompt_tokens: int = 0, completion_tokens: int = 0):
+        tokens = int(prompt_tokens) + int(completion_tokens)
+        cost = tokens / 1000.0 * self.cost_per_1k
+        rec = {
+            'prompt_tokens': int(prompt_tokens),
+            'completion_tokens': int(completion_tokens),
+            'tokens': tokens,
+            'cost': cost,
+            'meta': {'tool': tool},
+        }
+        self.records.append(rec)
+        self.total_tokens += tokens
+        self.total_cost += cost
+        self._save()
+        if self.budget is not None and self.total_cost > self.budget:
+            alert = {'alert': 'budget_exceeded', 'total_cost': self.total_cost}
+            if self.notifier:
+                try:
+                    self.notifier(tool, alert)
+                except Exception:
+                    pass
+            return alert
+        return {'total_tokens': self.total_tokens, 'total_cost': self.total_cost}
+
+    def totals(self, tool: Optional[str] = None):
+        if tool:
+            total = 0
+            for r in self.records:
+                meta = r.get('meta', {}) if isinstance(r, dict) else {}
+                if meta.get('tool') == tool:
+                    total += int(r.get('tokens', 0) or 0)
+            # return structure matching earlier TokenTracker
+            # split into prompt/completion totals where possible
+            prompt = sum(int(r.get('prompt_tokens', 0) or 0) for r in self.records if (r.get('meta', {}) or {}).get('tool') == tool)
+            completion = sum(int(r.get('completion_tokens', 0) or 0) for r in self.records if (r.get('meta', {}) or {}).get('tool') == tool)
+            return {'prompt': prompt, 'completion': completion, 'total': total}
+        return int(self.total_tokens)
+
+    def budget_exceeded(self, tool: str, budget: int) -> bool:
+        if budget < 0:
+            raise ValueError("budget must be non-negative")
+        totals = self.totals(tool)
+        if isinstance(totals, dict):
+            return totals.get('total', 0) > int(budget)
+        return totals > int(budget)
 
     def set_budget(self, amount: float):
         self.budget = float(amount)
