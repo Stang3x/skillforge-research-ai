@@ -1,7 +1,7 @@
 import importlib.util
 import sys
 
-path = 'research-assistant/research_assistant.py'
+path = 'research-assistant/researchassistant.py'
 spec = importlib.util.spec_from_file_location('ra', path)
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)

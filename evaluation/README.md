@@ -23,7 +23,7 @@ Recording from production agents
 In your production agent flow, call `tracker.record_request(prompt, completion, meta={})`
 or `tracker.record(tool, prompt_tokens, completion_tokens)` after each request/response pair.
 
-Examples and integration points are provided in `research-assistant/research_assistant.py`.
+Examples and integration points are provided in `research-assistant/researchassistant.py`.
 
 Alerts
 ------

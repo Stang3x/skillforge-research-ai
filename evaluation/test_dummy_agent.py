@@ -8,7 +8,7 @@ import importlib.util
 
 # Load `research_assistant.py` by path because the package name contains a hyphen
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-RA_PATH = PROJECT_ROOT / 'research-assistant' / 'research_assistant.py'
+RA_PATH = PROJECT_ROOT / 'research-assistant' / 'researchassistant.py'
 spec = importlib.util.spec_from_file_location('research_assistant_mod', str(RA_PATH))
 ra = importlib.util.module_from_spec(spec)
 import sys

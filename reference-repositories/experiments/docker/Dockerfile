@@ -36,7 +36,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY --chown=researcher:researcher 17_research_assistant_semantic_scholar.py ./research_assistant.py
+COPY --chown=researcher:researcher 17_research_assistant_semantic_scholar.py ./researchassistant.py
 
 # Copy entrypoint script
 COPY --chown=researcher:researcher docker/entrypoint.sh /entrypoint.sh
@@ -60,4 +60,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 
 # Default command
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "research_assistant.py"]
+CMD ["python", "researchassistant.py"]

@@ -55,7 +55,7 @@ Cache contains 1 entries
 
 ### Step 2: Integrate into research_assistant.py (30 minutes)
 
-**File:** `research-assistant/research_assistant.py`
+**File:** `research-assistant/researchassistant.py`
 
 Add this at the top of the file:
 
@@ -286,7 +286,7 @@ Created:
 ✅ context-optimization/cache/       (created by module)
 
 To modify:
-📝 research-assistant/research_assistant.py
+📝 research-assistant/researchassistant.py
 ```
 
 ---

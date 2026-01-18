@@ -253,7 +253,7 @@ class SearchResultCache:
 ---
 
 #### Task 2.2: Integrate Cache into search_web()
-**File:** `research-assistant/research_assistant.py`
+**File:** `research-assistant/researchassistant.py`
 
 **Current code (lines ~50-70):**
 ```python
@@ -331,7 +331,7 @@ def _format_search_results(results: List[dict], from_cache: bool = False) -> str
 
 **Test:**
 ```bash
-python research_assistant.py
+python researchassistant.py
 # You: what is research methodology?
 # [API CALL] Fetching fresh results...
 # Agent: [responds]

@@ -108,7 +108,7 @@
 ### Application Code
 ```
 research-assistant/
-├─ research_assistant.py      (197 lines) - Core agent
+├─ researchassistant.py      (197 lines) - Core agent
 ├─ skill_loader.py           (275 lines) - Skill management
 ├─ test_skills.py            (100 lines) - Testing harness
 ├─ requirements.txt          (50 lines)  - Dependencies

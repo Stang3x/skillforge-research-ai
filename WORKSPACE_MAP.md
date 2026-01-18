@@ -57,7 +57,7 @@ Gemini projects/
 │  └─ INDEX.md                    (Navigation guide)
 │
 ├─ 🤖 research-assistant/         ← MAIN CODE
-│  ├─ research_assistant.py       (Core agent)
+│  ├─ researchassistant.py       (Core agent)
 │  ├─ skill_loader.py             (Skill system)
 │  ├─ test_skills.py              (Testing)
 │  ├─ requirements.txt            (Dependencies)
@@ -286,7 +286,7 @@ c:\Users\Stang3x\Documents\Gemini projects\
 ### Code Location
 ```
 research-assistant/
-├─ research_assistant.py            (Main agent)
+├─ researchassistant.py            (Main agent)
 ├─ skill_loader.py                  (Skills system)
 └─ test_skills.py                   (Testing)
 ```

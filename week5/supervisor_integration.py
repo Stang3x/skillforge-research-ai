@@ -102,7 +102,7 @@ if __name__ == "__main__":
             ra_mod = None
             try:
                 import importlib.util
-                ra_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "research-assistant", "research_assistant.py")
+                ra_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "research-assistant", "researchassistant.py")
                 spec = importlib.util.spec_from_file_location("ra_module", ra_path)
                 ra_mod = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(ra_mod)

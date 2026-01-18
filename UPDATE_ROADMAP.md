@@ -41,7 +41,7 @@ Gemini projects/
 │   └── implementation-guides/
 │
 ├── 🤖 research-assistant/     ← Main agent application
-│   ├── research_assistant.py
+│   ├── researchassistant.py
 │   ├── skill_loader.py
 │   ├── .env (configuration)
 │   └── skills/ (local skills)
@@ -109,7 +109,7 @@ Gemini projects/
 - ✅ Exit code 0 verified
 
 **Deliverables:**
-- research_assistant.py (functional agent)
+- researchassistant.py (functional agent)
 - requirements.txt (dependencies)
 - .env (configuration template)
 

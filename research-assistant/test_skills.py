@@ -29,7 +29,7 @@ class SkillTester:
         
         try:
             result = subprocess.run(
-                [self.python_exe, "research_assistant.py"],
+                [self.python_exe, "researchassistant.py"],
                 input=f"{query}\nexit\n",
                 text=True,
                 timeout=timeout,
@@ -205,7 +205,7 @@ def main():
     print("\n" + "="*70)
     print("NEXT STEPS")
     print("="*70)
-    print("1. Try interactive mode: python research_assistant.py")
+    print("1. Try interactive mode: python researchassistant.py")
     print("2. Test skill queries manually")
     print("3. Type 'help' to see skill list")
     print("4. Type 'skills' for detailed documentation")

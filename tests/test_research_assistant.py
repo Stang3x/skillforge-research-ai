@@ -6,7 +6,7 @@ import importlib.util
 
 def _load_module():
     root = os.path.dirname(os.path.dirname(__file__))
-    path = os.path.join(root, "research-assistant", "research_assistant.py")
+    path = os.path.join(root, "research-assistant", "researchassistant.py")
     spec = importlib.util.spec_from_file_location("ra", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

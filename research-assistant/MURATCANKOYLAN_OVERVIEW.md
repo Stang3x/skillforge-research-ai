@@ -44,7 +44,7 @@ COGNITIVE (Intelligence)
 
 ### Your Current State (Week 3)
 ```
-research_assistant.py
+researchassistant.py
 ├─ 3 local skills (research-methodology, citation-standards, source-evaluation)
 ├─ skill_loader.py (loads skills from skills/ directory)
 ├─ Mock search_web() (doesn't call real API yet)
@@ -53,7 +53,7 @@ research_assistant.py
 
 ### Week 4 (With Muratcankoylan Integration)
 ```
-research_assistant.py
+researchassistant.py
 ├─ 6 skills total:
 │  ├─ Local: research-methodology, citation-standards, source-evaluation
 │  └─ Reference: context-optimization, advanced-evaluation, multi-agent-patterns

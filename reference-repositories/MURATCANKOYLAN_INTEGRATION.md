@@ -145,7 +145,7 @@ class SearchResultCache:
         with open(cache_file, 'w') as f:
             json.dump(results, f)
 
-# In research_assistant.py
+# In researchassistant.py
 cache = SearchResultCache()
 
 async def search_web(query: str) -> str:
@@ -324,7 +324,7 @@ async def benchmark_mock_vs_real():
 
 **Optimization:**
 ```python
-# In research_assistant.py
+# In researchassistant.py
 
 @agent.action
 def search_web(query: str) -> str:
@@ -481,7 +481,7 @@ memory.append({
 
 ```
 research-assistant/
-├── research_assistant.py          # Core agent (updated)
+├── researchassistant.py          # Core agent (updated)
 ├── skill_loader.py                # Updated to load reference skills
 ├── caching.py                     # NEW (Week 4)
 ├── evaluator.py                   # NEW (Week 4)

@@ -57,7 +57,7 @@ MODEL_ID=openai/gpt-4o-mini  # or other available models
 
 Run the research assistant:
 ```bash
-python research_assistant.py
+python researchassistant.py
 ```
 
 ### Example Interactions

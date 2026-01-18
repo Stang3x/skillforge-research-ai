@@ -40,7 +40,7 @@ research-assistant/
 ├── .env                              # ← Configuration (CREATED)
 ├── .env.example                      # ← Config template (CREATED)
 ├── requirements.txt                  # ← Dependencies (CREATED)
-├── research_assistant.py             # ← Main agent code (CREATED)
+├── researchassistant.py             # ← Main agent code (CREATED)
 ├── README.md                         # ← User guide (CREATED)
 ├── LEARNING_ROADMAP.md              # ← Learning guide (CREATED)
 └── progress.md                       # ← This file (CREATED)
@@ -80,7 +80,7 @@ C:/Users/Stang3x/Documents/Gemini projects/.venv/
 
 **Status:** ✅ Complete
 
-**File:** `research_assistant.py`
+**File:** `researchassistant.py`
 
 **Key Components:**
 
@@ -333,7 +333,7 @@ LEARNING_ROADMAP   → "How do I build agents?"
 
 ### 6. **Code Organization: Single File MVP**
 
-**Decision:** Keep implementation in single `research_assistant.py` file
+**Decision:** Keep implementation in single `researchassistant.py` file
 
 **Reasoning:**
 - ✅ Simple for MVP
@@ -422,7 +422,7 @@ python-dotenv>=1.0.0
 
 | File | Lines | Purpose | Status |
 |------|-------|---------|--------|
-| `research_assistant.py` | 350 | Main agent implementation | ✅ Complete |
+| `researchassistant.py` | 350 | Main agent implementation | ✅ Complete |
 | `README.md` | 300 | User documentation | ✅ Complete |
 | `LEARNING_ROADMAP.md` | 600 | Developer learning guide | ✅ Complete |
 | `.agent.md` | 800 | Agent specification | ✅ Complete |
@@ -466,7 +466,7 @@ research-assistant/
   - Quick summaries and links
 
 **Files to Modify:**
-- `research_assistant.py` - Update `search_web()` function
+- `researchassistant.py` - Update `search_web()` function
 - `requirements.txt` - Add new API client packages
 - `.env.example` - Add Google API configuration
 
@@ -499,7 +499,7 @@ research-assistant/
 - `models.py` - Data models (Session, Result, etc.)
 
 **Files to Modify:**
-- `research_assistant.py` - Integrate database
+- `researchassistant.py` - Integrate database
 - `requirements.txt` - Add `sqlalchemy`
 
 **Estimated Effort:** 6-8 hours
@@ -532,7 +532,7 @@ research-assistant/
 - `orchestration.py` - Agent orchestration
 
 **Files to Modify:**
-- `research_assistant.py` - Main orchestration loop
+- `researchassistant.py` - Main orchestration loop
 
 **Estimated Effort:** 8-10 hours
 

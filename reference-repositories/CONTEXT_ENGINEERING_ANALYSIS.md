@@ -74,7 +74,7 @@ These provide conceptual foundation—your skills should load these first.
 - Information density vs redundancy tradeoffs
 
 **Triggers:** "understand context", "explain context windows", "design agent architecture"  
-**For Your Project:** Use this to optimize your system prompt and tool definitions in research_assistant.py
+**For Your Project:** Use this to optimize your system prompt and tool definitions in researchassistant.py
 
 ---
 
