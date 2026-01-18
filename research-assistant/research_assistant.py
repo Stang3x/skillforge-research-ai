@@ -326,7 +326,37 @@ async def interactive_loop():
 
 
 def main():
-    if LOCAL_TEST:
+    # runtime CLI flags
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Research Assistant CLI")
+    parser.add_argument("--local-test", action="store_true", help="Run the local demo and exit")
+    parser.add_argument("--no-cache", action="store_true", help="Bypass cache for this run")
+    parser.add_argument("--cache-clear", action="store_true", help="Clear file cache on startup")
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
+    args = parser.parse_args()
+
+    if args.cache_clear:
+        try:
+            d = os.getenv("CACHE_DIR", ".simple_cache")
+            import shutil
+
+            if os.path.exists(d):
+                shutil.rmtree(d)
+                if args.verbose:
+                    print(f"Cleared cache directory: {d}")
+        except Exception as e:
+            if args.verbose:
+                print(f"Failed to clear cache: {e}")
+
+    if args.no_cache:
+        # disable cache for this process
+        try:
+            cache = None
+        except Exception:
+            pass
+
+    if args.local_test or LOCAL_TEST:
         # small demo run
         print("LOCAL_TEST: running a brief demo")
         print(search_web("python caching"))
