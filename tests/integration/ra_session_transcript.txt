@@ -1,0 +1,22 @@
+Warning: Skills directory 'skills' not found
+============================================================
+Research Assistant Agent
+============================================================
+Using model: openai/gpt-4o-mini
+Type 'exit' to quit, 'help' for available commands
+============================================================
+
+
+You: 
+Available commands and features:
+- Ask research questions
+- Request information synthesis
+- Ask for citations in different formats (APA, MLA, Chicago)
+- Ask about research methodology, source evaluation, or citation standards
+
+Available Skills:
+
+- Type 'skills' for detailed skill documentation
+- Type 'exit' to quit
+
+You: Goodbye!
