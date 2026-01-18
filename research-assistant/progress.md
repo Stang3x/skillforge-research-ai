@@ -61,7 +61,7 @@ research-assistant/
 
 **Environment File (.env):**
 ```env
-GITHUB_TOKEN=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
+GITHUB_TOKEN=GITHUB_TOKEN_PLACEHOLDER
 MODEL_ID=openai/gpt-4o-mini
 ```
 
@@ -364,7 +364,7 @@ research_assistant/
 
 ```env
 # Authentication
-GITHUB_TOKEN=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
+GITHUB_TOKEN=GITHUB_TOKEN_PLACEHOLDER
 
 # Model Configuration
 MODEL_ID=openai/gpt-4o-mini
