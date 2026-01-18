@@ -1,0 +1,7 @@
+Rank,Task,Description,Area,Priority,Estimated Effort (days),ETA (date),Status,Next Action,Owner
+1,Multi-agent orchestration,Finalize orchestrator and agent interaction flows.,Orchestration,High,5,Pending,Integrate orchestrator into research-assistant,Dev,2026-01-23
+2,Memory system: knowledge graph,Implement knowledge-graph based memory and APIs.,Memory,High,6,Pending,Prototype memory.graph and connectors,Dev,2026-01-24
+3,Production OTLP config + secrets,Document and template production OTLP exporter configs and secret handling.,Ops,High,2,Pending,Draft README and example env files,Ops,2026-01-20
+4,Finalize exemplars backend verification,Complete CI collector verification and document results.,Telemetry,High,2,In Progress,Run CI with METRICS_COLLECTOR_URL,Dev/Infra,2026-01-20
+5,TokenTracker per-tool budgets,Add per-tool budget alerts and dashboards.,Observability,Medium,3,Pending,Add alert rules and dashboards,Ops/Dev,2026-01-21
+6,Cache performance scale tests,Run large-scale cache benchmarks and produce report.,Caching,Medium,4,Pending,Run `tools/cache_benchmark.py`,Perf,2026-01-22

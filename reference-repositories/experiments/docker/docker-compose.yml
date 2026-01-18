@@ -1,0 +1,73 @@
+# Research Assistant Docker Compose
+#
+# Quick Start:
+#   1. Copy .env.example to .env and add your API keys
+#   2. docker-compose up -d
+#   3. docker-compose exec research-assistant bash (to interact)
+#
+# Or for interactive mode:
+#   docker-compose run --rm research-assistant
+
+version: '3.8'
+
+services:
+  research-assistant:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: research-assistant:latest
+    container_name: research-assistant
+
+    # Interactive mode - attach terminal
+    stdin_open: true
+    tty: true
+
+    # Environment variables
+    environment:
+      # Required: Anthropic API key
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # Optional: Semantic Scholar API key for higher rate limits
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY:-}
+      # Data directory
+      - RESEARCH_DATA_DIR=/app/data
+
+    # Persistent volumes
+    volumes:
+      # Research data (notes, exports, cache)
+      - research-data:/app/data
+      # Optional: Mount local PDFs directory
+      - ${LOCAL_PDF_DIR:-./pdfs}:/app/data/pdfs:ro
+      # Optional: Mount local exports for access
+      - ${LOCAL_EXPORT_DIR:-./exports}:/app/data/exports
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import anthropic; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+# Named volumes for persistence
+volumes:
+  research-data:
+    driver: local
+    name: research-assistant-data
+
+# Networks (optional, for future microservices)
+networks:
+  default:
+    name: research-network

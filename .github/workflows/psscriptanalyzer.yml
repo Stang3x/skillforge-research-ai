@@ -1,0 +1,45 @@
+name: PSScriptAnalyzer
+
+on:
+  pull_request:
+    branches: [ develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  lint-powershell:
+    name: Run PSScriptAnalyzer on PowerShell examples
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        uses: actions/setup-python@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $path = 'reference-repositories/third_party'
+          if (Test-Path $path) {
+            Write-Host "Scanning $path with PSScriptAnalyzer"
+            $results = Invoke-ScriptAnalyzer -Path $path -Recurse -Settings reference-repositories/PSScriptAnalyzerSettings.psd1
+            if ($results.Count -gt 0) {
+              $errors = $results | Where-Object { $_.Severity -eq 'Error' }
+              if ($errors) {
+                Write-Host "Found $($errors.Count) error(s):"
+                $errors | Format-Table -AutoSize
+                exit 1
+              }
+              Write-Host "No errors found (warnings may be present)."
+            } else {
+              Write-Host "No diagnostics found."
+            }
+          } else {
+            Write-Host "Path $path not found; skipping PSScriptAnalyzer job.";
+          }

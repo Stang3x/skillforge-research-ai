@@ -1,0 +1,102 @@
+name: Exemplar Harness
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch: {}
+
+jobs:
+  run-harness:
+    runs-on: ubuntu-latest
+    env:
+      METRICS_COLLECTOR_URL: ${{ secrets.METRICS_COLLECTOR_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install optional OTEL (collector mode)
+        if: env.METRICS_COLLECTOR_URL != ''
+        run: |
+          python -m pip install opentelemetry-sdk opentelemetry-exporter-otlp || true
+
+      - name: Check collector URL availability
+        run: |
+          if [ -z "$METRICS_COLLECTOR_URL" ]; then
+            echo "METRICS_COLLECTOR_URL not set; collector-mode will be skipped.";
+          else
+            echo "METRICS_COLLECTOR_URL is set; collector-mode will attempt a best-effort run.";
+          fi
+        shell: bash
+
+      - name: Ensure docker-compose is available
+        run: |
+          if ! command -v docker-compose >/dev/null 2>&1; then
+            echo "docker-compose not found; installing via pip"
+            python -m pip install --upgrade pip
+            python -m pip install docker-compose
+          else
+            echo "docker-compose available"
+          fi
+        shell: bash
+
+      - name: Start local OTEL testbed (if no collector URL)
+        if: env.METRICS_COLLECTOR_URL == ''
+        run: |
+          echo "Starting local OTEL Collector + Tempo via docker-compose"
+          docker-compose -f .github/testbed/docker-compose.yml up -d --quiet-pull
+          # Wait for collector /metrics to be available
+          for i in {1..30}; do
+            if curl -sS -H "Accept: application/openmetrics-text" http://localhost:9464/metrics >/dev/null 2>&1; then
+              echo "collector ready"; break
+            fi
+            echo "waiting for collector... ($i)";
+            sleep 2
+          done
+          if ! curl -sS -H "Accept: application/openmetrics-text" http://localhost:9464/metrics >/dev/null 2>&1; then
+            echo "Collector did not become ready in time"; exit 1
+          fi
+          echo "METRICS_COLLECTOR_URL=http://localhost:9464/metrics" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Run exemplar harness (direct mode)
+        run: |
+          set -o pipefail
+          python tools/exemplar_harness.py --mode direct 2>&1 | tee harness_direct.log
+        shell: bash
+
+      - name: Upload direct-mode logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-direct-log
+          path: harness_direct.log
+
+      - name: Run exemplar harness (collector mode)
+        if: env.METRICS_COLLECTOR_URL != ''
+        run: |
+          set -o pipefail
+          python tools/exemplar_harness.py --mode collector --collector-url "$METRICS_COLLECTOR_URL" 2>&1 | tee harness_collector.log || true
+        shell: bash
+
+      - name: Upload collector-mode logs
+        if: env.METRICS_COLLECTOR_URL != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-collector-log
+          path: harness_collector.log
+
+      - name: Tear down local OTEL testbed
+        if: always()
+        run: |
+          echo "Tearing down local testbed (if present)"
+          docker-compose -f .github/testbed/docker-compose.yml down -v --remove-orphans || true
+        shell: bash

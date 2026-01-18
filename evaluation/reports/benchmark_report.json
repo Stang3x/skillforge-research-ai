@@ -1,0 +1,202 @@
+{
+  "results": [
+    {
+      "query": "Python programming language",
+      "cold": {
+        "time_s": 0.000709,
+        "input_tokens": 15,
+        "output_tokens": 74,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 0.000539,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 37,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Machine learning basics",
+      "cold": {
+        "time_s": 0.000546,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      },
+      "warm": {
+        "avg_time_s": 0.000514,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      }
+    },
+    {
+      "query": "Research assistant capabilities",
+      "cold": {
+        "time_s": 0.000797,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      },
+      "warm": {
+        "avg_time_s": 0.000654,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      }
+    },
+    {
+      "query": "Agent framework design patterns",
+      "cold": {
+        "time_s": 0.00058,
+        "input_tokens": 20,
+        "output_tokens": 68,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      },
+      "warm": {
+        "avg_time_s": 0.000485,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 34,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      }
+    },
+    {
+      "query": "Transformer model architecture",
+      "cold": {
+        "time_s": 0.000643,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 0.000501,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Context window optimization techniques",
+      "cold": {
+        "time_s": 0.000645,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 0.000533,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Prompt engineering best practices",
+      "cold": {
+        "time_s": 0.000569,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 0.000583,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Memory systems for agents",
+      "cold": {
+        "time_s": 0.000591,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 0.000572,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Evaluation metrics for LLMs",
+      "cold": {
+        "time_s": 0.000602,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 0.000495,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Unknown topic for negative case",
+      "cold": {
+        "time_s": 0.000667,
+        "input_tokens": 25,
+        "output_tokens": 24,
+        "accuracy": 2.33,
+        "completeness": 2.89
+      },
+      "warm": {
+        "avg_time_s": 0.000583,
+        "iterations": 3,
+        "cache_hits": 3,
+        "input_tokens": 5,
+        "output_tokens": 12,
+        "accuracy": 2.33,
+        "completeness": 2.89
+      }
+    }
+  ],
+  "summary": {
+    "queries": 10,
+    "total_cold_time_s": 0.0063,
+    "total_warm_time_s": 0.0055,
+    "percent_time_improvement": 14.02,
+    "total_input_tokens": 226,
+    "total_output_tokens": 639
+  }
+}

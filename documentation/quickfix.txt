@@ -1,0 +1,69 @@
+The error you're seeing:
+
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
+
+is not coming from PowerShell — it's a Python error.It happens when Python tries to interpret a Windows path as a normal string literal and encounters a backslash \ followed by something that looks like a unicode escape sequence (like \U, \x, \n, etc.).Most likely cause in your caseYou are running something like this (or equivalent) from inside a Python script / Jupyter / IPython:python
+
+os.system(r".\tools\run_psscriptanalyzer.ps1 -FailOnError")
+# or
+subprocess.run([r".\tools\run_psscriptanalyzer.ps1", "-FailOnError"])
+# or even just
+print(".\tools\run_psscriptanalyzer.ps1")
+
+And Python sees .\tools\... → the \t is interpreted as tab character (\t = tab), and later \r as carriage return, but more importantly — when it sees \U (in \run_...) it thinks you're trying to start a very long unicode escape \UXXXXXXXX — which is invalid → boom, SyntaxError.Quick Fixes (choose one)1. Best & cleanest: use raw string with r prefixpython
+
+script_path = r".\tools\run_psscriptanalyzer.ps1"
+subprocess.run([script_path, "-FailOnError"], check=True)
+# or
+os.system(rf"{script_path} -FailOnError")
+
+2. Use forward slashes (Python happily accepts them on Windows)python
+
+subprocess.run(["./tools/run_psscriptanalyzer.ps1", "-FailOnError"], check=True)
+# or even absolute
+subprocess.run(["C:/path/to/tools/run_psscriptanalyzer.ps1", "-FailOnError"])
+
+3. Double every backslash (old-school escape)python
+
+subprocess.run([".\\tools\\run_psscriptanalyzer.ps1", "-FailOnError"], check=True)
+
+4. Use pathlib (modern & recommended)python
+
+from pathlib import Path
+import subprocess
+
+script = Path("tools") / "run_psscriptanalyzer.ps1"
+subprocess.run([script, "-FailOnError"], check=True)
+# pathlib automatically handles all platforms correctly
+
+Summary Table – What works / what crashesCode style
+Works?
+Why?
+".\tools\run_psscriptanalyzer.ps1"
+No
+\t → tab, \r → CR, \U → error
+r".\tools\run_psscriptanalyzer.ps1"
+Yes
+Raw string → backslashes ignored
+"./tools/run_psscriptanalyzer.ps1"
+Yes
+Forward slashes always safe
+".\\tools\\run_psscriptanalyzer.ps1"
+Yes
+Double backslash = literal \
+Path("tools") / "run_psscriptanalyzer.ps1"
+Yes
+pathlib handles it correctly
+
+Quick test you can run right nowpython
+
+# This will fail
+print(".\tools\run_psscriptanalyzer.ps1")
+
+# These will succeed
+print(r".\tools\run_psscriptanalyzer.ps1")
+print("./tools/run_psscriptanalyzer.ps1")
+print(".\\tools\\run_psscriptanalyzer.ps1")
+
+Use raw strings (r"...") or forward slashes whenever you deal with Windows paths in Python — it's the #1 most common Windows+Python gotcha.
+

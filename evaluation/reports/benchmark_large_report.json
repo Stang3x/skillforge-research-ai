@@ -1,0 +1,1912 @@
+{
+  "results": [
+    {
+      "query": "Dataset curation design patterns",
+      "cold": {
+        "time_s": 0.000615,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Prompt templates basics",
+      "cold": {
+        "time_s": 0.000572,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Tool use tutorial",
+      "cold": {
+        "time_s": 0.000559,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Evaluation metrics tutorial",
+      "cold": {
+        "time_s": 0.000661,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Memory systems basics",
+      "cold": {
+        "time_s": 0.000583,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Context window overview",
+      "cold": {
+        "time_s": 0.000572,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Reinforcement learning tutorial",
+      "cold": {
+        "time_s": 0.000551,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Prompt engineering comparison",
+      "cold": {
+        "time_s": 0.000595,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Fine-tuning comparison",
+      "cold": {
+        "time_s": 0.000557,
+        "input_tokens": 10,
+        "output_tokens": 18,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 9,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Dataset curation advanced",
+      "cold": {
+        "time_s": 0.000727,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Prompt engineering design patterns",
+      "cold": {
+        "time_s": 0.000889,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Agent framework case study",
+      "cold": {
+        "time_s": 0.000722,
+        "input_tokens": 20,
+        "output_tokens": 68,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 34,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      }
+    },
+    {
+      "query": "Memory systems overview",
+      "cold": {
+        "time_s": 0.000651,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Transformer model tutorial",
+      "cold": {
+        "time_s": 0.000637,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Chain of thought overview",
+      "cold": {
+        "time_s": 0.000544,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Agent framework advanced",
+      "cold": {
+        "time_s": 0.000578,
+        "input_tokens": 15,
+        "output_tokens": 66,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 33,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Knowledge retrieval advanced",
+      "cold": {
+        "time_s": 0.000558,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Evaluation metrics comparison",
+      "cold": {
+        "time_s": 0.000803,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Prompt templates advanced",
+      "cold": {
+        "time_s": 0.000965,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Fine-tuning best practices",
+      "cold": {
+        "time_s": 0.000687,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Dataset curation comparison",
+      "cold": {
+        "time_s": 0.000569,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Context window advanced",
+      "cold": {
+        "time_s": 0.000576,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Reinforcement learning advanced",
+      "cold": {
+        "time_s": 0.000596,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Agent framework overview",
+      "cold": {
+        "time_s": 0.000558,
+        "input_tokens": 15,
+        "output_tokens": 66,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 33,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Transformer model comparison",
+      "cold": {
+        "time_s": 0.000584,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Fine-tuning design patterns",
+      "cold": {
+        "time_s": 0.000564,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Citation extraction design patterns",
+      "cold": {
+        "time_s": 0.000559,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Context window tutorial",
+      "cold": {
+        "time_s": 0.000873,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Chain of thought comparison",
+      "cold": {
+        "time_s": 0.000703,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Knowledge retrieval basics",
+      "cold": {
+        "time_s": 0.000661,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Citation extraction basics",
+      "cold": {
+        "time_s": 0.000672,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Knowledge retrieval overview",
+      "cold": {
+        "time_s": 0.000576,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Memory systems tutorial",
+      "cold": {
+        "time_s": 0.000545,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Transformer model overview",
+      "cold": {
+        "time_s": 0.000611,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Dataset curation basics",
+      "cold": {
+        "time_s": 0.000582,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Prompt templates case study",
+      "cold": {
+        "time_s": 0.000789,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Prompt engineering overview",
+      "cold": {
+        "time_s": 0.000561,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Python programming best practices",
+      "cold": {
+        "time_s": 0.000638,
+        "input_tokens": 20,
+        "output_tokens": 76,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      }
+    },
+    {
+      "query": "Prompt engineering tutorial",
+      "cold": {
+        "time_s": 0.000641,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Research assistant best practices",
+      "cold": {
+        "time_s": 0.000635,
+        "input_tokens": 20,
+        "output_tokens": 78,
+        "accuracy": 3.15,
+        "completeness": 3.71
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 39,
+        "accuracy": 3.15,
+        "completeness": 3.71
+      }
+    },
+    {
+      "query": "Memory systems best practices",
+      "cold": {
+        "time_s": 0.000564,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Research assistant basics",
+      "cold": {
+        "time_s": 0.000499,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      }
+    },
+    {
+      "query": "Research assistant design patterns",
+      "cold": {
+        "time_s": 0.000606,
+        "input_tokens": 20,
+        "output_tokens": 78,
+        "accuracy": 3.15,
+        "completeness": 3.71
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 39,
+        "accuracy": 3.15,
+        "completeness": 3.71
+      }
+    },
+    {
+      "query": "Machine learning advanced",
+      "cold": {
+        "time_s": 0.000561,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      }
+    },
+    {
+      "query": "Fine-tuning case study",
+      "cold": {
+        "time_s": 0.000561,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Semantic search basics",
+      "cold": {
+        "time_s": 0.000572,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Knowledge retrieval case study",
+      "cold": {
+        "time_s": 0.000557,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Citation extraction best practices",
+      "cold": {
+        "time_s": 0.000707,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Citation extraction overview",
+      "cold": {
+        "time_s": 0.000727,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Machine learning design patterns",
+      "cold": {
+        "time_s": 0.000593,
+        "input_tokens": 20,
+        "output_tokens": 78,
+        "accuracy": 2.71,
+        "completeness": 3.4
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 39,
+        "accuracy": 2.71,
+        "completeness": 3.4
+      }
+    },
+    {
+      "query": "Document retrieval best practices",
+      "cold": {
+        "time_s": 0.000591,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Machine learning best practices",
+      "cold": {
+        "time_s": 0.000566,
+        "input_tokens": 20,
+        "output_tokens": 78,
+        "accuracy": 2.71,
+        "completeness": 3.4
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 39,
+        "accuracy": 2.71,
+        "completeness": 3.4
+      }
+    },
+    {
+      "query": "Document retrieval comparison",
+      "cold": {
+        "time_s": 0.000589,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Evaluation metrics basics",
+      "cold": {
+        "time_s": 0.00061,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Context window basics",
+      "cold": {
+        "time_s": 0.000603,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Few-shot learning tutorial",
+      "cold": {
+        "time_s": 0.00057,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Memory systems comparison",
+      "cold": {
+        "time_s": 0.000564,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Chain of thought case study",
+      "cold": {
+        "time_s": 0.00055,
+        "input_tokens": 25,
+        "output_tokens": 24,
+        "accuracy": 2.54,
+        "completeness": 3.04
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 5,
+        "output_tokens": 12,
+        "accuracy": 2.54,
+        "completeness": 3.04
+      }
+    },
+    {
+      "query": "Prompt engineering case study",
+      "cold": {
+        "time_s": 0.000798,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 4e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Semantic search comparison",
+      "cold": {
+        "time_s": 0.00066,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Citation extraction comparison",
+      "cold": {
+        "time_s": 0.000558,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Chain of thought basics",
+      "cold": {
+        "time_s": 0.000557,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Research assistant comparison",
+      "cold": {
+        "time_s": 0.000562,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 3.0,
+        "completeness": 3.6
+      }
+    },
+    {
+      "query": "Python programming overview",
+      "cold": {
+        "time_s": 0.000704,
+        "input_tokens": 15,
+        "output_tokens": 74,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 37,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Agent framework design patterns",
+      "cold": {
+        "time_s": 0.000573,
+        "input_tokens": 20,
+        "output_tokens": 68,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 34,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      }
+    },
+    {
+      "query": "Tool use case study",
+      "cold": {
+        "time_s": 0.00054,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Context window comparison",
+      "cold": {
+        "time_s": 0.000586,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Agent framework tutorial",
+      "cold": {
+        "time_s": 0.000597,
+        "input_tokens": 15,
+        "output_tokens": 66,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 33,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Chain of thought tutorial",
+      "cold": {
+        "time_s": 0.000882,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Prompt engineering best practices",
+      "cold": {
+        "time_s": 0.000608,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Prompt templates comparison",
+      "cold": {
+        "time_s": 0.000569,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Transformer model design patterns",
+      "cold": {
+        "time_s": 0.000559,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Fine-tuning overview",
+      "cold": {
+        "time_s": 0.000532,
+        "input_tokens": 10,
+        "output_tokens": 18,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 9,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Reinforcement learning design patterns",
+      "cold": {
+        "time_s": 0.000559,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Few-shot learning design patterns",
+      "cold": {
+        "time_s": 0.00058,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.33,
+        "completeness": 2.89
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.33,
+        "completeness": 2.89
+      }
+    },
+    {
+      "query": "Prompt templates overview",
+      "cold": {
+        "time_s": 0.000511,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Tool use comparison",
+      "cold": {
+        "time_s": 0.000539,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Tool use design patterns",
+      "cold": {
+        "time_s": 0.000569,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Document retrieval overview",
+      "cold": {
+        "time_s": 0.000813,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Dataset curation tutorial",
+      "cold": {
+        "time_s": 0.000674,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Memory systems advanced",
+      "cold": {
+        "time_s": 0.00062,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Machine learning comparison",
+      "cold": {
+        "time_s": 0.000687,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      }
+    },
+    {
+      "query": "Citation extraction tutorial",
+      "cold": {
+        "time_s": 0.000544,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Evaluation metrics best practices",
+      "cold": {
+        "time_s": 0.000627,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Evaluation metrics design patterns",
+      "cold": {
+        "time_s": 0.000543,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Document retrieval design patterns",
+      "cold": {
+        "time_s": 0.000649,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Evaluation metrics overview",
+      "cold": {
+        "time_s": 0.000634,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Python programming advanced",
+      "cold": {
+        "time_s": 0.000568,
+        "input_tokens": 15,
+        "output_tokens": 74,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 37,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Transformer model case study",
+      "cold": {
+        "time_s": 0.000587,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Citation extraction advanced",
+      "cold": {
+        "time_s": 0.000758,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Reinforcement learning basics",
+      "cold": {
+        "time_s": 0.000591,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Prompt templates design patterns",
+      "cold": {
+        "time_s": 0.000774,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Chain of thought advanced",
+      "cold": {
+        "time_s": 0.000711,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.23,
+        "completeness": 2.8
+      }
+    },
+    {
+      "query": "Agent framework best practices",
+      "cold": {
+        "time_s": 0.000588,
+        "input_tokens": 20,
+        "output_tokens": 68,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 34,
+        "accuracy": 2.43,
+        "completeness": 3.2
+      }
+    },
+    {
+      "query": "Agent framework basics",
+      "cold": {
+        "time_s": 0.000608,
+        "input_tokens": 15,
+        "output_tokens": 66,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 33,
+        "accuracy": 2.23,
+        "completeness": 3.06
+      }
+    },
+    {
+      "query": "Machine learning basics",
+      "cold": {
+        "time_s": 0.000575,
+        "input_tokens": 15,
+        "output_tokens": 76,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 38,
+        "accuracy": 2.54,
+        "completeness": 3.28
+      }
+    },
+    {
+      "query": "Evaluation metrics advanced",
+      "cold": {
+        "time_s": 0.000578,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Document retrieval advanced",
+      "cold": {
+        "time_s": 0.00056,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 2e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    },
+    {
+      "query": "Knowledge retrieval design patterns",
+      "cold": {
+        "time_s": 0.000678,
+        "input_tokens": 20,
+        "output_tokens": 22,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      },
+      "warm": {
+        "avg_time_s": 3e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 11,
+        "accuracy": 2.14,
+        "completeness": 2.74
+      }
+    },
+    {
+      "query": "Dataset curation overview",
+      "cold": {
+        "time_s": 0.000681,
+        "input_tokens": 15,
+        "output_tokens": 20,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      },
+      "warm": {
+        "avg_time_s": 1e-06,
+        "iterations": 5,
+        "cache_hits": 5,
+        "input_tokens": 4,
+        "output_tokens": 10,
+        "accuracy": 1.92,
+        "completeness": 2.57
+      }
+    }
+  ],
+  "summary": {
+    "queries": 100,
+    "total_cold_time_s": 0.0622,
+    "total_warm_time_s": 0.0001,
+    "percent_time_improvement": 99.81,
+    "total_input_tokens": 2071,
+    "total_output_tokens": 4584
+  }
+}

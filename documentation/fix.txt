@@ -1,0 +1,69 @@
+The most common reasons you're getting an error (or unexpected result) when running:bash
+
+git add -A
+git commit -m "Add Week 5 milestones, exemplar harness, testbed and CI workflow improvements"
+
+...are these (in rough order of probability in 2026):1. Most likely — Nothing actually changed / already committed / nothing stagedAfter git add -A you see:
+
+On branch main
+nothing to commit, working tree clean
+
+(or similar)Fix / Diagnosis steps — run these one by one:bash
+
+# This is the golden command — always start here
+git status
+
+# See exactly what git thinks is staged right now
+git diff --cached   # (should show the diff of what will be committed)
+
+# See ALL changes (staged + unstaged + untracked)
+git diff            # unstaged changes
+git ls-files --others --exclude-standard   # truly untracked files git add -A should have caught
+
+Common causes & quick fixesYou already committed these exact changes earlier → nothing left to commit
+You're on the wrong branch (e.g. main instead of develop/week5)
+The files are ignored by .gitignore (even git add -A/--force won't add them)
+You're in a subdirectory and the changes are outside the repo root
+You have submodules with "dirty" state → Git sometimes refuses to commit cleanly
+
+Try this safe sequence:bash
+
+git status
+git add -A          # just in case something was missed
+git status          # must show green "Changes to be committed" lines!
+git commit -m "your message here"
+
+2. Commit message editor opened and you exited wrong (very common for beginners)If you didn't use -m (or your git config has no default -m behavior), git opens an editor (vim/nano/etc.) for the message.Many people panic, press random keys and exit → commit aborts → looks like error.Fix — force inline message (what you already do):bash
+
+git commit -m "Add Week 5 milestones, exemplar harness, testbed and CI workflow improvements"
+
+Or configure git to never open editor:bash
+
+git config --global commit.template /dev/null
+# or just always use -m
+
+3. Pre-commit hook failed (very common in modern repos with CI/test setup)Many repos (especially with week5 harness/testbed/CI improvements) have a .git/hooks/pre-commit script that runs tests/linters/formatting.If it fails → commit aborts with error.Quick checks/fixesbash
+
+# See if you have hooks
+ls .git/hooks/pre-commit   # if it exists → that's probably it
+
+# Bypass hook just once (for testing)
+git commit --no-verify -m "your message"
+
+# Fix properly — usually need to run the linter/formatter manually
+# Examples depending on your project:
+black .               # python black
+prettier --write .    # js/ts
+npm run lint -- --fix
+cargo fmt             # rust
+
+4. Other less common but possible issuesindex.lock stuck (crashed git earlier)bash
+
+rm -f .git/index.lock
+
+GPG signing failed (if you have commit.gpgsign = true)bash
+
+git commit -m "msg" --no-gpg-sign   # one time
+
+Huge files → Git LFS or size limit error (check error message)
+

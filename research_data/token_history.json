@@ -1,0 +1,30 @@
+{
+  "sessions": [
+    {
+      "start": "2026-01-18T01:06:26.751563",
+      "usage": [
+        {
+          "input_tokens": 120,
+          "output_tokens": 300,
+          "model": "test-model",
+          "agent": "researcher",
+          "timestamp": "2026-01-18T01:06:26.751731"
+        },
+        {
+          "input_tokens": 10,
+          "output_tokens": 50,
+          "model": "test-model",
+          "agent": "analyst",
+          "timestamp": "2026-01-18T01:06:26.751740"
+        },
+        {
+          "input_tokens": 500,
+          "output_tokens": 800,
+          "model": "test-model",
+          "agent": "writer",
+          "timestamp": "2026-01-18T01:06:26.751745"
+        }
+      ]
+    }
+  ]
+}

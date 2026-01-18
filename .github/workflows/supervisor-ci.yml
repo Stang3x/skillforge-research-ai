@@ -1,0 +1,38 @@
+name: Supervisor CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run supervisor tests
+        run: |
+          python evaluation/test_supervisor.py
+
+      - name: Generate performance plots
+        run: |
+          if [ -f evaluation/generate_plots.py ]; then python evaluation/generate_plots.py; fi
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: supervisor-artifacts
+          path: |
+            evaluation/reports/**
+            week5/**

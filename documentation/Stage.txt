@@ -1,0 +1,45 @@
+To interactively stage only the changes in your documentation and CI-related files (while ignoring everything else), use git add --patch (or -p) with path patterns.This is the cleanest, most interactive way — Git will show you each changed hunk only from the files you specify, and you decide yes/no/split/edit for each one.Recommended one-liner approaches (pick what matches your repo structure)bash
+
+# 1. Most common — docs + .github CI workflows (very popular in 2025–2026 projects)
+git add -p docs/ .github/workflows/ README.md CHANGELOG.md
+
+# 2. If your docs are in multiple places (docs/ + doc/ + READMEs)
+git add -p docs/ doc/ README* docs.* *.md CONTRIBUTING.md .github/
+
+# 3. More precise — only markdown docs + all CI yaml files
+git add -p '**/*.md' .github/workflows/*.yml .github/workflows/*.yaml
+
+# 4. Very broad but still only doc+ci (careful — might catch unrelated .md files)
+git add -p '**/*.md' '**/*.yml' '**/*.yaml' docs/ .github/
+
+What happens when you run one of these?Git will:Only look at files matching the paths you gave
+Show you one hunk (change block) at a time
+Ask you for each hunk:Common choices:y → yes, stage this hunk
+n → no, don't stage it
+q → quit (stop here, keep the rest unstaged)
+a → stage this hunk and all later hunks in this file
+d → don't stage this and all later hunks
+s → split the hunk into smaller pieces (very useful!)
+e → manually edit the hunk (power user)
+? → show help
+
+After you're done with all hunks → the selected changes are staged.Then just commit normally:bash
+
+git commit -m "Update documentation and improve CI workflows"
+
+Quick safety check first (always good idea)bash
+
+# See exactly which files git would consider
+git diff --name-only docs/ .github/workflows/
+
+# Or full status
+git status
+
+If you already staged everything by mistakeReset the staging area (doesn't touch your working files):bash
+
+git reset    # unstages everything
+# or more targeted:
+git reset docs/ .github/
+
+Then start the interactive add again.This method gives you maximum control without touching code files — perfect for your "documentation and CI files only" goal.Good luck with the commit! 
+
