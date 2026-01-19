@@ -1,6 +1,7 @@
 The output you're seeing is normal and expected when running that exact command chain in PowerShell on Windows.Let's break it down:powershell
 
-git add .github/workflows/python-tests.yml ; git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN" ; true
+git add .github/workflows/python-tests.yml
+git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN" 2>$null
 
 What happened step by stepgit add .github/workflows/python-tests.yml
 → Added the file (no output = success)
@@ -18,7 +19,7 @@ true
 
 true: The term 'true' is not recognized as a name of a cmdlet, function, script file, or executable program.
 
-Why do people write ; true at the end?This is a very common pattern in bash/zsh/sh scripts (Linux/macOS) where:bash
+Why do people write ; true at the end? This is a very common pattern in bash/zsh/sh scripts (Linux/macOS) where:
 
 git add ... ; git commit ... ; true
 
