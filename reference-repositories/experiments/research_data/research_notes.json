@@ -1,0 +1,20 @@
+{
+  "notes": [
+    {
+      "query": "What is machine learning?",
+      "result": "# SUMMARY REPORT: Machine Learning Overview\n\n## Technical Issues Encountered\nTwo Wikipedia search attempts resulted in JSON parsing errors, preventing direct article retrieval from the source database.\n\n## Content Delivered\nDespite the technical failures, comprehensive foundational information about Machine Learning was provided through established knowledge base.\n\n---\n\n## KEY INFORMATION COVERED\n\n### Definition\nMachine Learning defined as an AI subfield focused on algorithms that improve through experience without explicit programming for every scenario.\n\n### Core Components Explained\n\n**1. Learning Mechanisms**\n- Pattern recognition from data\n- Prediction and decision-making based on learned patterns\n\n**2. Four Primary Learning Types**\n- **Supervised Learning**: Uses labeled training data\n- **Unsupervised Learning**: Discovers patterns in unlabeled data  \n- **Reinforcement Learning**: Trial-and-error with reward systems\n- **Semi-supervised Learning**: Hybrid approach\n\n**3. Practical Applications**\n- Image/speech recognition\n- Natural language processing\n- Recommendation engines\n- Autonomous vehicles\n- Medical diagnostics\n- Financial forecasting\n\n**4. Common Algorithms**\nNeural networks, decision trees, support vector machines, k-means clustering mentioned as representative examples.\n\n---\n\n## ASSESSMENT\n\n**Strengths**: Clear structural organization, accurate high-level concepts, appropriate scope for general audience.\n\n**Limitations**: No Wikipedia source verification possible, lacks depth on historical development, mathematical foundations, or current research trends.\n\n**Status**: Functional overview provided despite data retrieval failure.",
+      "sources_used": [
+        "wikipedia"
+      ],
+      "agents_used": [
+        "coordinator",
+        "writer",
+        "researcher"
+      ],
+      "tokens_used": 3828,
+      "timestamp": "2026-01-16T21:43:22.088572",
+      "diagrams": [],
+      "tags": []
+    }
+  ]
+}

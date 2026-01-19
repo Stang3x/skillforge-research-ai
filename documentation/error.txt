@@ -1,0 +1,75 @@
+The output you're seeing is normal and expected when running that exact command chain in PowerShell on Windows.Let's break it down:powershell
+
+git add .github/workflows/python-tests.yml
+git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN" 2>$null
+
+What happened step by stepgit add .github/workflows/python-tests.yml
+→ Added the file (no output = success)
+git commit -m "..."
+→ Successfully created commit 6a4bedee
+→ You see the normal git commit message:  
+
+[week5-milestones 6a4bedee] ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN
+ 1 file changed, 9 insertions(+)
+
+true
+→ This is not a PowerShell built-in command
+→ PowerShell treats true as a boolean literal ($true), not the Unix-style no-op command
+→ Because it's not followed by any operator or cmdlet, PowerShell tries to execute true as if it were a command/program → fails with the familiar error:
+
+true: The term 'true' is not recognized as a name of a cmdlet, function, script file, or executable program.
+
+Why do people write ; true at the end? This is a very common pattern in bash/zsh/sh scripts (Linux/macOS) where:
+
+git add ... ; git commit ... ; true
+
+Ensures the overall command chain exits with status 0 (success), even if the commit fails (e.g. no changes to commit)
+Very useful in Makefiles, CI scripts, or pre-commit hooks where you don't want a failed commit to block the next step
+
+On Windows PowerShell, the equivalent ways to achieve the same "always succeed" behavior are:powershell
+
+# Option 1: Just ignore errors (most common & clean)
+git add .github/workflows/python-tests.yml ; git commit -m "ci: ..." 2>$null
+
+# Option 2: Use ; $LASTEXITCODE = 0  (forces success exit code)
+git add ... ; git commit ... ; $LASTEXITCODE = 0
+
+# Option 3: Use try/catch (more verbose but very explicit)
+try {
+    git add .github/workflows/python-tests.yml
+    git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN"
+} catch {}
+
+But in most cases — especially if this is just a local commit before pushing — you can safely remove the ; true entirely:powershell
+
+git add .github/workflows/python-tests.yml
+git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN"
+
+Quick look at your commit changes (good practice!)From the message, it sounds like your .github/workflows/python-tests.yml now contains something like:yaml
+
+permissions:
+  id-token: write          # ← Required for OIDC / id-token requests (e.g. cloud auth)
+  contents: read           # ← Typical minimum for checkout/build
+
+# ... later in a step that uses gh CLI or similar ...
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # ← Exposes GITHUB_TOKEN as GH_TOKEN
+
+This is correct and follows best practices:id-token: write is needed when you want to request OIDC JWT tokens (common for authenticating to AWS/GCP/Azure from Actions)
+Setting GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} is the standard way to use the built-in token with the gh CLI in workflows
+
+Great job on the security-conscious commit! TL;DR — What to do nextJust run without the true:powershell
+
+git add .github/workflows/python-tests.yml
+git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN"
+# or if you really want always-success:
+git add ... ; git commit ... 2>$null
+
+Then push:powershell
+
+git push
+
+You're good — the error was harmless and very common when copying bash patterns to PowerShell. Keep going! 
+
+29 web pages
+

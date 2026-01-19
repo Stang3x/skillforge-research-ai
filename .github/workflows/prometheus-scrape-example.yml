@@ -1,0 +1,75 @@
+name: Prometheus Scrape — Example
+
+# Working example CI workflow with best-practices inspired by public Grok/X posts
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 12 * * *'
+  push:
+    paths:
+      - 'evaluation/**'
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - 'evaluation/**'
+      - '.github/workflows/**'
+
+concurrency:
+  group: prometheus-scrape-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Prometheus scrape (matrix)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.11, 3.12]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.cache/pip-build
+          key: ${{ runner.os }}-pip-${{ matrix.python }}-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python }}-
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Install optional OTEL extras (best-effort)
+        run: |
+          if [ -f requirements-otel.txt ]; then pip install -r requirements-otel.txt || true; fi
+
+      - name: Run Prometheus scrape test
+        env:
+          METRICS_EXPORTER_ENABLED: '1'
+        run: |
+          set -e
+          python evaluation/test_prometheus_scrape.py
+
+      - name: Upload metrics artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metrics-export-ci
+          path: evaluation/metrics_export_ci.jsonl

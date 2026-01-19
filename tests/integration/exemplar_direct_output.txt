@@ -1,0 +1,2 @@
+{"mode": "direct", "trace_id": "933075cf081abf6809f6d0aea81fdd2e", "scraped": true}
+SUCCESS: exemplar found in direct-mode /metrics

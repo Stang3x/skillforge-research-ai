@@ -17,7 +17,7 @@ Gemini projects/
 │   └── guides/                # Implementation guides
 │
 ├── research-assistant/        # Main agent application
-│   ├── research_assistant.py  # Core agent
+│   ├── researchassistant.py  # Core agent
 │   ├── skill_loader.py        # Skill management
 │   ├── .env                   # Configuration
 │   ├── requirements.txt       # Dependencies

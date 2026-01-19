@@ -1,0 +1,18 @@
+# Research Assistant Dependencies
+# Python 3.11+ required
+
+# Core - Anthropic Claude API
+anthropic>=0.40.0
+
+# UI - Rich terminal formatting
+rich>=13.0.0
+
+# PDF - Reading and writing
+pypdf>=4.0.0
+fpdf2>=2.7.0
+
+# Markdown processing
+markdown>=3.5.0
+
+# HTTP requests (usually included, but explicit is better)
+requests>=2.31.0

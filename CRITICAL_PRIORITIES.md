@@ -1,6 +1,12 @@
 # 🎯 CRITICAL PRIORITIES & IMPLEMENTATION ROADMAP
 
-**Last Updated:** January 17, 2026  
+**Last Updated:** January 18, 2026  
+**Sprint Top Priorities (Immediate):**
+
+- **Top 1 — Implement Caching Layer (CRITICAL):** Prevent rate-limit failures and reduce API cost.
+- **Top 2 — LLM-as-Judge Evaluation (CRITICAL):** Automated quality scoring for benchmarking.
+- **Top 3 — Token & Tool Optimization (CRITICAL):** Reduce token usage and budget impact.
+
 **Priority Assessment Period:** Week 4 (Jan 20-26, 2026)  
 **Framework:** Microsoft Agent Framework v1.0.0b260116  
 **Model:** openai/gpt-4o-mini (GitHub Models)
@@ -306,7 +312,7 @@ RESULT: 3x speedup, 3x cost reduction
 │ 9:00-11:00   │ Create cache.py + SearchResultCache class    │
 │ 11:00-12:00  │ Implement TTL + persistence logic            │
 │ 12:00-1:00   │ Lunch break                                  │
-│ 1:00-3:00    │ Integrate caching into research_assistant.py │
+│ 1:00-3:00    │ Integrate caching into researchassistant.py │
 │ 3:00-4:00    │ Test cache hits & verify exit code 0         │
 │ TIME: 4 hours, TEST: Pass ✓                                 │
 └──────────────────────────────────────────────────────────────┘

@@ -1,0 +1,38 @@
+{
+  "runs": [
+    {
+      "query": "Python caching",
+      "search": {
+        "time_s": 0.0018,
+        "preview": "Python \u2014 Overview \u2014 Python is a high-level, interpreted programming language. (https://python.org/)"
+      },
+      "synth": {
+        "time_s": 0.0026,
+        "preview": "SYNTHESIS: Key points for 'Python caching':\n- Python \u2014 Overview \u2014 Python is a high-level, interpreted programming language. (https://python.org/)"
+      }
+    },
+    {
+      "query": "What is machine learning",
+      "search": {
+        "time_s": 0.0018,
+        "preview": "Machine Learning \u2014 Intro \u2014 Machine learning enables systems to learn from data. (https://en.wikipedia.org/wiki/Machine_learning)"
+      },
+      "synth": {
+        "time_s": 0.0025,
+        "preview": "SYNTHESIS: Key points for 'What is machine learning':\n- Machine Learning \u2014 Intro \u2014 Machine learning enables systems to learn from data. (https://en.wikipedia.org/wiki/Machine_learning)"
+      }
+    },
+    {
+      "query": "Explain agent orchestration",
+      "search": {
+        "time_s": 0.0017,
+        "preview": "Results for Explain agent orchestration \u2014 No direct match for 'Explain agent orchestration'. Consider refining the query. (https://example.com/search)"
+      },
+      "synth": {
+        "time_s": 0.0028,
+        "preview": "SYNTHESIS: Key points for 'Explain agent orchestration':\n- Results for Explain agent orchestration \u2014 No direct match for 'Explain agent orchestration'. Consider refining the query. (https://example.com/search)"
+      }
+    }
+  ],
+  "summary_ts": 1768830501.6658142
+}

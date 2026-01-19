@@ -1,0 +1,32 @@
+name: Metrics Exporter Smoke Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  metrics-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install minimal deps
+        run: |
+          python -m pip install --upgrade pip
+      - name: Run metrics demo (LOCAL_TEST)
+        env:
+          LOCAL_TEST: '1'
+          METRICS_EXPORTER_ENABLED: '1'
+          METRICS_EXPORT_TARGET: 'file'
+          METRICS_EXPORT_FILE: metrics_export_ci.jsonl
+        run: |
+          python tools/run_local_metrics_demo.py
+      - name: Verify metrics file
+        run: |
+          if [ ! -f metrics_export_ci.jsonl ]; then echo "Metrics file not created"; exit 1; fi
+          wc -l metrics_export_ci.jsonl

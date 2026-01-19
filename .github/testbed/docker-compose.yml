@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.81.0
+    command: ["--config=/conf/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/conf/otel-collector-config.yaml:ro
+    ports:
+      - "4318:4318"    # OTLP HTTP
+      - "4317:4317"    # OTLP gRPC
+      - "9464:9464"    # Prometheus exporter
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9464/metrics"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  tempo:
+    image: grafana/tempo:1.6.0
+    ports:
+      - "14268:14268"
+      - "9411:9411"

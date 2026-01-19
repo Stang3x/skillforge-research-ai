@@ -1,0 +1,16 @@
+receivers:
+  otlp:
+    protocols:
+      http: {}
+      grpc: {}
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:9464"
+    enable_open_metrics: true
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
