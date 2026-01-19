@@ -7,12 +7,20 @@ from pathlib import Path
 import os
 import sys
 
-# Ensure repository root is on sys.path so `research_assistant` package imports correctly
+# Ensure repository root is on sys.path so loaders work
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from research_assistant import search_web, synthesize_findings
+# Load the canonical researchassistant script by file path and re-export tools
+import importlib.util
+RA_PATH = ROOT / 'research-assistant' / 'researchassistant.py'
+spec = importlib.util.spec_from_file_location('ra_module', str(RA_PATH))
+ra = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(ra)
+
+search_web = ra.search_web
+synthesize_findings = ra.synthesize_findings
 
 OUT = Path('evaluation') / 'reports' / 'collector_examples.json'
 OUT.parent.mkdir(parents=True, exist_ok=True)

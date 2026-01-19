@@ -14,7 +14,13 @@ proj_root = Path(__file__).resolve().parents[1]
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
-from research_assistant import search_web, synthesize_findings
+import importlib.util
+RA_PATH = proj_root / 'research-assistant' / 'researchassistant.py'
+spec = importlib.util.spec_from_file_location('ra_module', str(RA_PATH))
+ra = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(ra)
+search_web = ra.search_web
+synthesize_findings = ra.synthesize_findings
 
 RESULTS_PATH = Path('evaluation') / 'benchmark_results.json'
 
