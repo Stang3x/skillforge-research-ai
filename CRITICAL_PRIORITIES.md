@@ -312,7 +312,7 @@ RESULT: 3x speedup, 3x cost reduction
 │ 9:00-11:00   │ Create cache.py + SearchResultCache class    │
 │ 11:00-12:00  │ Implement TTL + persistence logic            │
 │ 12:00-1:00   │ Lunch break                                  │
-│ 1:00-3:00    │ Integrate caching into research_assistant.py │
+│ 1:00-3:00    │ Integrate caching into researchassistant.py │
 │ 3:00-4:00    │ Test cache hits & verify exit code 0         │
 │ TIME: 4 hours, TEST: Pass ✓                                 │
 └──────────────────────────────────────────────────────────────┘

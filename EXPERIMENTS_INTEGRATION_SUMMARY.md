@@ -368,7 +368,7 @@ Token Tracking Module
 
 Original: reference-repositories/experiments/14_research_assistant_token_tracking.py
 Adapted: January 20, 2026
-Changes: Integrated with research_assistant.py, added budget alerts
+Changes: Integrated with researchassistant.py, added budget alerts
 """
 ```
 
@@ -430,7 +430,7 @@ Changes: Integrated with research_assistant.py, added budget alerts
 
 ### Immediate (Week 4 - This Week)
 - [ ] Clone 14_research_assistant_token_tracking.py
-- [ ] Adapt to research_assistant.py architecture
+- [ ] Adapt to researchassistant.py architecture
 - [ ] Test token counting accuracy
 - [ ] Integrate budget alerts
 - [ ] Document performance metrics
