@@ -3,7 +3,7 @@
     {
       "query": "Python programming language",
       "cold": {
-        "time_s": 0.001665,
+        "time_s": 0.001602,
         "input_tokens": 15,
         "output_tokens": 74,
         "accuracy": 2.23,
@@ -22,7 +22,7 @@
     {
       "query": "Machine learning basics",
       "cold": {
-        "time_s": 0.001392,
+        "time_s": 0.001778,
         "input_tokens": 15,
         "output_tokens": 76,
         "accuracy": 2.54,
@@ -41,14 +41,14 @@
     {
       "query": "Research assistant capabilities",
       "cold": {
-        "time_s": 0.001262,
+        "time_s": 0.001368,
         "input_tokens": 15,
         "output_tokens": 76,
         "accuracy": 3.0,
         "completeness": 3.6
       },
       "warm": {
-        "avg_time_s": 2e-06,
+        "avg_time_s": 3e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -60,14 +60,14 @@
     {
       "query": "Agent framework design patterns",
       "cold": {
-        "time_s": 0.001587,
+        "time_s": 0.001449,
         "input_tokens": 20,
         "output_tokens": 68,
         "accuracy": 2.43,
         "completeness": 3.2
       },
       "warm": {
-        "avg_time_s": 2e-06,
+        "avg_time_s": 3e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -79,7 +79,7 @@
     {
       "query": "Transformer model architecture",
       "cold": {
-        "time_s": 0.00144,
+        "time_s": 0.001763,
         "input_tokens": 15,
         "output_tokens": 20,
         "accuracy": 1.92,
@@ -98,7 +98,7 @@
     {
       "query": "Context window optimization techniques",
       "cold": {
-        "time_s": 0.001594,
+        "time_s": 0.001506,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
@@ -117,14 +117,14 @@
     {
       "query": "Prompt engineering best practices",
       "cold": {
-        "time_s": 0.001574,
+        "time_s": 0.001836,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
         "completeness": 2.74
       },
       "warm": {
-        "avg_time_s": 2e-06,
+        "avg_time_s": 3e-06,
         "iterations": 3,
         "cache_hits": 3,
         "input_tokens": 4,
@@ -136,7 +136,7 @@
     {
       "query": "Memory systems for agents",
       "cold": {
-        "time_s": 0.001335,
+        "time_s": 0.001381,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
@@ -155,7 +155,7 @@
     {
       "query": "Evaluation metrics for LLMs",
       "cold": {
-        "time_s": 0.001677,
+        "time_s": 0.001274,
         "input_tokens": 20,
         "output_tokens": 22,
         "accuracy": 2.14,
@@ -174,7 +174,7 @@
     {
       "query": "Unknown topic for negative case",
       "cold": {
-        "time_s": 0.001613,
+        "time_s": 0.00179,
         "input_tokens": 25,
         "output_tokens": 24,
         "accuracy": 2.33,
@@ -193,9 +193,9 @@
   ],
   "summary": {
     "queries": 10,
-    "total_cold_time_s": 0.0151,
+    "total_cold_time_s": 0.0157,
     "total_warm_time_s": 0.0,
-    "percent_time_improvement": 99.85,
+    "percent_time_improvement": 99.84,
     "total_input_tokens": 226,
     "total_output_tokens": 639
   }

@@ -53,7 +53,7 @@ Cache contains 1 entries
 
 ---
 
-### Step 2: Integrate into research_assistant.py (30 minutes)
+### Step 2: Integrate into researchassistant.py (30 minutes)
 
 **File:** `research-assistant/researchassistant.py`
 
@@ -125,8 +125,8 @@ def _format_search_results(results) -> str:
     return json.dumps(compact, indent=2)
 ```
 
-**Verification:**
-- [ ] research_assistant.py imports caching module
+- **Verification:**
+- [ ] researchassistant.py imports caching module
 - [ ] search_cache is initialized at module level
 - [ ] search_web() checks cache before API call
 - [ ] search_web() stores results in cache
@@ -138,7 +138,7 @@ def _format_search_results(results) -> str:
 
 ```bash
 cd research-assistant/
-python research_assistant.py
+python researchassistant.py
 ```
 
 Run these test queries:

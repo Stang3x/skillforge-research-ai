@@ -5,7 +5,7 @@ Goal: complete and verify Week 4 priorities — caching, evaluation (LLM-as-Judg
 Completed artifacts (paths):
 - Caching module: context-optimization/caching.py
 - In-memory LRU wrapper: evaluation/cache_wrappers.py
-- Cache integration (research assistant): research-assistant/research_assistant.py (uses LRU wrapper)
+ - Cache integration (research assistant): research-assistant/researchassistant.py (uses LRU wrapper)
 - Cache integration test: evaluation/test_cache_integration.py (passed)
 - Token tracker (lightweight): evaluation/token_tracker.py (quick test produced JSON)
 - Research evaluator (LLM-as-Judge heuristics): evaluation/research_evaluator.py
@@ -38,4 +38,4 @@ Next recommended steps:
 - Add backend switch (file-backed vs Redis vs in-memory) and run comparative benchmarks in CI.
 - Create lightweight visualizations (charts) from `evaluation/reports/*.json` and embed in `PERFORMANCE_METRICS.md`.
 
-If you want, I'll now commit these changes and/or run a short interactive `research_assistant.py --local-test` session to demonstrate the live flow.
+If you want, I'll now commit these changes and/or run a short interactive `researchassistant.py --local-test` session to demonstrate the live flow.
