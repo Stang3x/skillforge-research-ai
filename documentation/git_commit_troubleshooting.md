@@ -128,3 +128,34 @@ script = r".\tools\run_psscriptanalyzer.ps1"
 ```
 
 See `documentation/quickfix.txt` for more examples and diagnostics.
+
+### Note for PowerShell users: `; true` pattern
+
+Some examples and copy-pasted command chains use the Bash pattern `; true` at the end
+to force a zero exit code (useful in Makefiles or CI). On Windows PowerShell this will
+raise an error because `true` is treated as a boolean, not a no-op command. Instead,
+use one of these PowerShell-friendly alternatives when you want "always succeed":
+
+- Redirect stderr to null (quiet, common):
+
+```powershell
+git add .github/workflows/python-tests.yml ; git commit -m "ci: ..." 2>$null
+```
+
+- Force the last exit code to success (explicit):
+
+```powershell
+git add ... ; git commit ... ; $LASTEXITCODE = 0
+```
+
+- Use try/catch for explicit control:
+
+```powershell
+try {
+	git add .github/workflows/python-tests.yml
+	git commit -m "ci: set workflow permissions and expose GITHUB_TOKEN as GH_TOKEN"
+} catch {}
+```
+
+Or simply omit the `; true` when running the commands interactively — it's generally
+safe to run the `git add` / `git commit` sequence directly.
